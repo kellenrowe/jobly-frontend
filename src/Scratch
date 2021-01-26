@@ -1,12 +1,17 @@
 App -> { NavBar, Routes } -> Landing Page -> { signUpForm, LoginForm }
 
+// NOTE: landing page will have link to signup or login route
+
 - NavBar Component
+    -props:
+        - is there an user? then user data 
 
 - Routes Component
 
 - Landing Component: 
-    - Prop: None 
+    - Prop:  
     - State: 
+    NOTE: isLoggedIn/user data will need to be higher up in App
         - isLoggedIn: Boolean and defaults to false if no user token from backend
     - if isLoggedIn
         - if history exists, then show CompanyList page
@@ -14,6 +19,7 @@ App -> { NavBar, Routes } -> Landing Page -> { signUpForm, LoginForm }
     - else
         - show log in or sign up buttons 
 
+NOTE: all sign up should do is call the function to sign up (in APP), app will redirect. Same with Login form
 - SignUpForm Component: Shows sign up form for user
     - Prop: handleSubmit() fn from 
     - State: formData
@@ -59,6 +65,7 @@ CompanyList -> { SearchBar, Company }
 
 Company -> CompanyJobs -> Job
 
+NOTE: 
 - CompanyJobs Component:
     - Prop: company object { companyHandle, companyName, jobs, etc.}
     - State: 
@@ -69,8 +76,6 @@ Company -> CompanyJobs -> Job
     - handleApply
         - update isApplied array
         - useEffect: to update the the db 
-    - useEffect (on first render);
-        - get all jobs for this company, dependency on empty array
 
 - Job Component:
     - Prop: 
@@ -94,6 +99,7 @@ JobList Component:
     - when searchTerm is updated, going to update filteredJobs
     - fiteredJobs is derived from jobs
 
+NOTE: this is similar to signup/login should be handled in app
 Profile -> ProfileForm
 
 Profile Component:
