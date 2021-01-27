@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 /** Renders ProfileForm component
  *  Routes -> ProfileForm
@@ -7,6 +8,7 @@ import { useState } from "react";
 function ProfileForm({ updateUser, user }) {
   const initialState = user;
   const [formData, setFormData] = useState(initialState);
+  const history = useHistory();
 
   console.log('profile form user = ', user);
 
@@ -23,6 +25,7 @@ function ProfileForm({ updateUser, user }) {
     evt.preventDefault();
     updateUser(formData);
     setFormData(initialState);
+    history.push("/");
   }
 
   return (

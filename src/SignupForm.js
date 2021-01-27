@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 
 /** Renders SignupForm component
  *  Routes -> SignupForm
@@ -7,6 +9,7 @@ import { useState } from "react";
 function SignupForm({ updateUser }) {
   const initialState = {};
   const [formData, setFormData] = useState(initialState);
+  const history = useHistory();
 
   /** updates formData on change of input */
   function handleChange(evt) {
@@ -21,6 +24,7 @@ function SignupForm({ updateUser }) {
     evt.preventDefault();
     updateUser(formData);
     setFormData(initialState);
+    history.push("/companies");
   }
 
   return (

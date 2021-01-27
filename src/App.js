@@ -1,5 +1,5 @@
 import './App.css';
-// import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 // TODO: import functions from api.js
 import { useState } from "react";
@@ -27,7 +27,7 @@ import Routes from "./Routes";
 function App() {
   // TODO: state: user
   const [user, setUser] = useState()
-  console.log('top of App: User = ', user);
+  console.log('App rendering: User = ', user);
 
   function updateUser(newUser) {
     setUser(newUser);

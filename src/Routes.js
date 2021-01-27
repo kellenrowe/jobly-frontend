@@ -14,10 +14,8 @@ function Routes({ updateUser, user }) {
   let profileInfo = {};
 
   if (user) {
-    Object.keys(user).map(key => { 
-      if (key !== "jobs") {
-        return profileInfo[key] = user[key];
-      }
+    Object.keys(user).forEach(key => { 
+      if (key !== "jobs")return profileInfo[key] = user[key];
     });
     console.log('profileInfo in routes = ', profileInfo)
   }

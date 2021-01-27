@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 /** Renders LoginForm component
  *  Routes -> LoginForm
@@ -7,6 +8,7 @@ import { useState } from "react";
 function LoginForm({ updateUser }) {
   const initialState = {};
   const [formData, setFormData] = useState(initialState);
+  const history = useHistory();
 
   /** updates formData on change of input */
   function handleChange(evt) {
@@ -21,6 +23,7 @@ function LoginForm({ updateUser }) {
     evt.preventDefault();
     updateUser(formData);
     setFormData(initialState);
+    history.push("/companies");
   }
 
   return (
