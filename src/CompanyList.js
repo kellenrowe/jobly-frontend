@@ -11,28 +11,30 @@ import SearchForm from "./SearchForm";
  *  */
 
 function CompanyList() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [companies, setCompanies] = useState({});
-  console.log("rendering companies = ", companies);
+  // console.log("rendering companies = ", companies);
 
   function search(userInput) {
+    console.log('entered search in parent, userInput = ', userInput);
     setSearchTerm(userInput);
   }
 
   // TODO: need filter function from API to show companies
 
   useEffect(function fetchAllCompaniesOnRender() {
-    console.debug("effect beg all companies = ", companies);
+    // console.debug("effect beg all companies = ", companies);
     async function fetchAllCompanies() {
-      const companies = await JoblyApi.getAllCompanies();
-      console.log("companies = ", companies);
+      console.log('searchTerm = ', searchTerm);
+      const companies = await JoblyApi.getAllCompanies(searchTerm);
+      // console.log("companies = ", companies);
       setCompanies(companies);
       setIsLoading(false);
     }
     fetchAllCompanies();
-    console.debug("effect end all companies = ", companies);
-  }, []);
+    // console.debug("effect end all companies = ", companies);
+  }, [searchTerm]);
 
   if (isLoading) return <i>Loading...</i>
 
@@ -41,9 +43,9 @@ function CompanyList() {
   if (companies){
     showCompanies = companies.map(c =>
       (
-        <div>
+        <div key={c.handle}>
           <Link to={`/companies/${c.handle}`}>
-            <CompanyCard company={c} />
+           <CompanyCard company={c} />
           </Link>
         </div>
       )

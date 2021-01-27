@@ -4,7 +4,7 @@
  * 
  */
 function CompanyCard({ company }) {
-console.log("rendering CompanyCard ", company);
+// console.log("rendering CompanyCard ", company);
   return (
     <div className="CompanyCard">
       <h2>{company.name}</h2>
