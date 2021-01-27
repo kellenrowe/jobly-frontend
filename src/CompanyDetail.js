@@ -34,7 +34,8 @@ function CompanyDetail({ userJobs, updateJobs }) {
         const resp = await JoblyApi.getCompany(handle);
         setCompany(resp);
         setIsLoading(false);
-      } catch(err) {
+      } catch (err) {
+        // NOTE: why isn't this working?
         <Redirect to="/companies" />
       }
     }
@@ -54,7 +55,7 @@ function CompanyDetail({ userJobs, updateJobs }) {
       />
     </div>
     : `No jobs for this company`;
-
+// NOTE: bad param isnt handled ALSO handle no key for child
   return (
     <div className="CompanyDetail">
       {showJobs}

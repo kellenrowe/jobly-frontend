@@ -1,4 +1,3 @@
-
 /** Renders CompanyCard
  * 
  *  Props:
@@ -13,11 +12,10 @@ function CompanyCard({ company }) {
     <div className="CompanyCard">
       <h2>{company.name}</h2>
       {/* TODO: update company logo */}
-      <img src={company.logoUrl} alt="logo" ></img>
+      <img src={company.logoUrl} alt="logo" />
       <p>{company.description}</p>
     </div>
   );
-
 }
 
 export default CompanyCard;

@@ -20,9 +20,10 @@ import ProfileForm from "./ProfileForm";
 function Routes({ updateUser, user }) {
   let profileInfo = {};
 
+  // temp hack meant to generate user data for profileForm
   if (user) {
     Object.keys(user).forEach(key => { 
-      if (key !== "jobs")return profileInfo[key] = user[key];
+      if (key !== "jobs") return profileInfo[key] = user[key];
     });
     // console.log('profileInfo in routes = ', profileInfo)
   }
@@ -35,6 +36,7 @@ function Routes({ updateUser, user }) {
   function updateJobs(jobId){
     console.log("updateJobs called on ", jobId);
   }
+
 
 return (
     <Switch>
@@ -51,14 +53,15 @@ return (
         <JobList userJobs={userJobs} updateJobs={updateJobs}/>
       </Route>
       <Route exact path="/login">
+      //NOTE: app should have specific login function which we pass to login
         <LoginForm updateUser={updateUser}/>
       </Route>
       <Route exact path="/signup">
-      <SignupForm updateUser={updateUser}/>
+        <SignupForm updateUser={updateUser}/>
       </Route>
       <Route exact path="/profile">
-      <ProfileForm updateUser={updateUser} user={profileInfo}/>
-    </Route>
+        <ProfileForm updateUser={updateUser} user={profileInfo}/>
+      </Route>
     {/* 404 handler */}
       <Redirect to="/" />
     </Switch>

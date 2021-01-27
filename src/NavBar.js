@@ -8,6 +8,8 @@ import "./NavBar.css"
  */
 function NavBar({ user }){
 
+//NOTE: logout should be logout function, not just update user to null
+
   return (
     <nav className="NavBar">
       <NavLink exact to="/">Jobly</NavLink>

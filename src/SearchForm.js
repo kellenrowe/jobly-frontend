@@ -33,7 +33,7 @@ function SearchForm({ updateSearch, inputName }) {
     updateSearch(formData);
     setFormData(initialState);
   }
-
+// TODO name should be static string
   return (
     <form className="ProfileForm mx-auto" onSubmit={handleSubmit}>
       <div className="form-group">

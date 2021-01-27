@@ -1,6 +1,6 @@
 /** Renders JobCard component
  * 
- *  Prop:
+ *  Props:
  *  - job is an object of either (depending on which parent calls)
  *      { id, title, salary, equity } from grandparent CompanyDetail or
  *      { id, title, salary, equity, companyHandle, companyName } from 
@@ -26,6 +26,7 @@ function JobCard({ job, isApplied, updateJobs }) {
     : <button >APPLIED</button>
   );
 
+// TODO: fix winnie's inconsistent ternary
   return (
     <div className="JobCard">
       <h2>{job.title}</h2>

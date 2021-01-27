@@ -26,7 +26,7 @@ import Routes from "./Routes";
 function App() {
   // TODO: state: user
   const [user, setUser] = useState()
-  console.log('App rendering: User = ', user);
+  // console.log('App rendering: User = ', user);
 
   function updateUser(newUser) {
     setUser(newUser);
