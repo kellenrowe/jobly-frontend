@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-
 /** Renders SignupForm component
- *  Routes -> SignupForm
+ * 
+ *  Props:
+ *  - updateUser: fn passed from parent to update user data
+ * 
+ *  State:
+ *  - formData: input recieved from user
+ * 
+ *  Routes -> SignupForm -> Alert
  *  */
-
 function SignupForm({ updateUser }) {
   const initialState = {};
   const [formData, setFormData] = useState(initialState);
@@ -20,6 +25,7 @@ function SignupForm({ updateUser }) {
     }));
   }
 
+  /** handle signup of new user */
   function handleSubmit(evt) {
     evt.preventDefault();
     updateUser(formData);

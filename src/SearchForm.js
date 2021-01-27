@@ -7,7 +7,10 @@ import { useState } from "react";
  *  - inputName is a string of either "name" or "title" 
  *    (if searching by CompanyList or JobLIst, respectively)
  * 
- *  Routes -> SearchForm
+ *  State: 
+ *  - formData: input recieved from user
+ * 
+ *  { CompanyList, JobList } -> SearchForm
  *  */
 
 function SearchForm({ updateSearch, inputName }) {
@@ -26,7 +29,7 @@ function SearchForm({ updateSearch, inputName }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    console.log('formData = ', formData);
+    // console.log('formData = ', formData);
     updateSearch(formData);
     setFormData(initialState);
   }
@@ -34,7 +37,6 @@ function SearchForm({ updateSearch, inputName }) {
   return (
     <form className="ProfileForm mx-auto" onSubmit={handleSubmit}>
       <div className="form-group">
-        
         <input
           placeholder="Enter search term.."
           name={inputName}

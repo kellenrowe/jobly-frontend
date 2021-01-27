@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import NavBar from "./NavBar";
 import Routes from "./Routes";
 
-/** renders App
+/** Renders Jobly App
  * 
  *  state:
  *  - user: object like -
@@ -21,8 +21,7 @@ import Routes from "./Routes";
  *  where jobs is array of job objects like:
  *  { id, title, companyHandle, companyName, state }
  * 
- * 
- *  
+ *  App -> { NavBar, Routes }
  */
 function App() {
   // TODO: state: user
@@ -31,7 +30,6 @@ function App() {
 
   function updateUser(newUser) {
     setUser(newUser);
-
   }
 
   return (

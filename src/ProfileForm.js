@@ -2,15 +2,23 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 /** Renders ProfileForm component
- *  Routes -> ProfileForm
- *  */
-
+ * 
+ *  Props:
+ *  - updateUser: fn passed down from parent to update user data
+ *  - user: object with current user data
+ * 
+ *  State:
+ *  - formData: input recieved from user
+ * 
+ *  Routes -> ProfileForm -> Alert
+ *  
+ * */
 function ProfileForm({ updateUser, user }) {
   const initialState = user;
   const [formData, setFormData] = useState(initialState);
   const history = useHistory();
 
-  console.log('profile form user = ', user);
+  // console.log('profile form user = ', user);
 
   /** updates formData on change of input */
   function handleChange(evt) {
@@ -62,7 +70,6 @@ function ProfileForm({ updateUser, user }) {
           className="form-control"
           onChange={handleChange}
         />
-
       </div>
       <div>
         <button>Save Changes</button>

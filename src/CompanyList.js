@@ -13,7 +13,7 @@ import SearchForm from "./SearchForm";
  *  - isLoading is Boolean true when loading
  *  - companies is the array of company objects from API request
  * 
- *  Routes -> CompanyList 
+ *  Routes -> CompanyList -> { CompanyCard, SearchForm }
  *  */
 
 function CompanyList() {
@@ -23,7 +23,7 @@ function CompanyList() {
   // console.log("rendering companies = ", companies);
 
   function updateSearch(userInput) {
-    console.log('entered search in parent, userInput = ', userInput);
+    // console.log('entered search in parent, userInput = ', userInput);
     setSearchTerm(userInput);
   }
 

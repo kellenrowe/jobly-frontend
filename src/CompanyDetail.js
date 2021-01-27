@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import JoblyApi from "./api";
-/** Renders CompanyDetail component
+import JobCardList from "./JobCardList";
+
+/** Renders CompanyDetail component for company using handle
  *
  *  Props:
  *  - company: object like -
@@ -10,18 +12,21 @@ import JoblyApi from "./api";
  *  - userJobs is an array of jobs that the user has applied to like
  *      [{ id, title, salary, equity }, ...]
  *  - updateJobs is a fn passed down by parent to update user's joblist
+ * 
+ *  State:
+ *  - isLoading: Boolean value w/ default of true
+ *  - company: object like
+ *    { handle, name, description, numEmployees, logoUrl, jobs }
  *
- *  Routes -> CompanyDetail
+ *  Routes -> CompanyDetail -> JobCardList
  *  */
-
-import JobCardList from "./JobCardList";
 
 function CompanyDetail({ userJobs, updateJobs }) {
   const [isLoading, setIsLoading] = useState(true);
   const [company, setCompany] = useState({});
   const { handle } = useParams();
 
-  console.log('handle = ', handle);
+  // console.log('handle = ', handle);
 
   useEffect(function fetchCompanyOnRender() {
     async function fetchCompany() {

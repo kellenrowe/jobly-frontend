@@ -1,6 +1,11 @@
 
-/** renders company card
+/** Renders CompanyCard
  * 
+ *  Props:
+ *  - company: object like
+ *  { handle, name, description, numEmployees, logoUrl, jobs }
+ * 
+ *  CompanyList -> CompanyCard
  */
 function CompanyCard({ company }) {
 // console.log("rendering CompanyCard ", company);

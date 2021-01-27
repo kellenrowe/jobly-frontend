@@ -2,8 +2,16 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 /** Renders LoginForm component
- *  Routes -> LoginForm
- *  */
+ * 
+ *  Props:
+ *  - updateUser: fn passed from parent to update user data
+ * 
+ *  State:
+ *  - formData: input recieved from user
+ * 
+ *  Routes -> LoginForm -> Alert
+ *  
+ * */
 
 function LoginForm({ updateUser }) {
   const initialState = {};
@@ -19,6 +27,7 @@ function LoginForm({ updateUser }) {
     }));
   }
 
+  /** handles submission of form for user login */
   function handleSubmit(evt) {
     evt.preventDefault();
     updateUser(formData);
@@ -35,7 +44,6 @@ function LoginForm({ updateUser }) {
           className="form-control"
           onChange={handleChange}
         />
-
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -43,7 +51,6 @@ function LoginForm({ updateUser }) {
           className="form-control"
           onChange={handleChange}
         />
-
       </div>
       <div>
         <button>Log In</button>

@@ -1,20 +1,22 @@
-
 /** Renders JobCard component
  * 
  *  Prop:
+ *  - job is an object of either (depending on which parent calls)
+ *      { id, title, salary, equity } from grandparent CompanyDetail or
+ *      { id, title, salary, equity, companyHandle, companyName } from 
+ *        grandparent JobList
  *  - isApplied is a Boolean value
  *      true, if user has applied to the job
  *      false, otherwise
- *  - job is an object of either 
- *      { id, title, salary, equity } from CompanyDetail or
- *      { id, title, salary, equity, companyHandle, companyName } from JobList
  *  - updateJobs is a fn passed down by parent to update user's joblist
- *  
+ * 
+ *  JobCardList -> JobCard 
  */
 
 function JobCard({ job, isApplied, updateJobs }) {
-  console.debug("rendering JobCard ", job);
+  // console.debug("rendering JobCard ", job);
 
+  /** updates user's list of applied jobs */
   function handleClick(evt) {
     updateJobs(job.id);
   }
@@ -33,7 +35,6 @@ function JobCard({ job, isApplied, updateJobs }) {
       {showButton}
     </div>
   );
-
 }
 
 export default JobCard;

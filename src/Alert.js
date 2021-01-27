@@ -1,6 +1,6 @@
-
-/** renders alert
+/** Renders Alert
  * 
+ *  { LoginForm, SignupForm, ProfileForm } -> Alert
  */
 function Alert() {
 
@@ -9,7 +9,6 @@ function Alert() {
       <p>Alert</p>
     </div>
   );
-
 }
 
 export default Alert;

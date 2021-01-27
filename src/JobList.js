@@ -17,26 +17,26 @@ import SearchForm from "./SearchForm";
  *  - isLoading is Boolean true when loading
  *  - jobs is the array of job objects from API request
  * 
- *  Routes -> JobList 
+ *  Routes -> JobList -> { SearchForm, JobCardList }
  *  */
 
 function JobList({ userJobs, updateJobs }) {
   const [searchTerm, setSearchTerm] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [jobs, setJobs] = useState({});
-  console.log("rendering jobs = ", jobs);
+  // console.log("rendering jobs = ", jobs);
 
   function updateSearch(userInput) {
-    console.log('entered search in parent, userInput = ', userInput);
+    // console.log('entered search in parent, userInput = ', userInput);
     setSearchTerm(userInput);
   }
 
   useEffect(function fetchAllJobsOnRender() {
-    console.debug("effect beg all jobs = ", jobs);
+    // console.debug("effect beg all jobs = ", jobs);
     async function fetchAllJobs() {
-      console.log('searchTerm = ', searchTerm);
+      // console.log('searchTerm = ', searchTerm);
       const jobs = await JoblyApi.getAllJobs(searchTerm);
-      console.log("jobs = ", jobs);
+      // console.log("jobs = ", jobs);
       setJobs(jobs);
       setIsLoading(false);
     }

@@ -1,6 +1,5 @@
 import { Switch, Redirect, Route } from "react-router-dom";
 
-
 import Homepage from "./Homepage";
 import CompanyList from "./CompanyList";
 import CompanyDetail from "./CompanyDetail";
@@ -9,7 +8,15 @@ import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import ProfileForm from "./ProfileForm";
 
-/** Renders Routes component. */
+/** Renders Routes component. 
+ * 
+ *  Props: 
+ *  - updateUser: fn passed from parent to update user data
+ *  - user: object with current user data
+ * 
+ *  App -> Routes -> { Homepage, CompanyList, CompanyDetail, JobList, 
+ *                      LoginForm, SignupForm, ProfileForm }
+*/
 function Routes({ updateUser, user }) {
   let profileInfo = {};
 
@@ -17,13 +24,14 @@ function Routes({ updateUser, user }) {
     Object.keys(user).forEach(key => { 
       if (key !== "jobs")return profileInfo[key] = user[key];
     });
-    console.log('profileInfo in routes = ', profileInfo)
+    // console.log('profileInfo in routes = ', profileInfo)
   }
 
   // TODO: pass userJobs and updateJobs fn from App
 
   let userJobs = [];
 
+  /** update jobs-applied-to for current user */
   function updateJobs(jobId){
     console.log("updateJobs called on ", jobId);
   }
