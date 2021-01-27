@@ -1,10 +1,16 @@
 import { useState } from "react";
 
 /** Renders SearchForm component
+ * 
+ *  Prop:
+ *  - updateSearch fn passed down by parent
+ *  - inputName is a string of either "name" or "title" 
+ *    (if searching by CompanyList or JobLIst, respectively)
+ * 
  *  Routes -> SearchForm
  *  */
 
-function SearchForm({ search }) {
+function SearchForm({ updateSearch, inputName }) {
   const initialState = {};
   const [formData, setFormData] = useState(initialState);
 
@@ -21,7 +27,7 @@ function SearchForm({ search }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     console.log('formData = ', formData);
-    search(formData);
+    updateSearch(formData);
     setFormData(initialState);
   }
 
@@ -31,7 +37,7 @@ function SearchForm({ search }) {
         
         <input
           placeholder="Enter search term.."
-          name="name"
+          name={inputName}
           className="form-control"
           onChange={handleChange}
         />

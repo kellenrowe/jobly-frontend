@@ -7,6 +7,12 @@ import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 
 /** Renders CompanyList component 
+ * 
+ *  State: 
+ *  - searchTerm is a string input by user
+ *  - isLoading is Boolean true when loading
+ *  - companies is the array of company objects from API request
+ * 
  *  Routes -> CompanyList 
  *  */
 
@@ -16,17 +22,15 @@ function CompanyList() {
   const [companies, setCompanies] = useState({});
   // console.log("rendering companies = ", companies);
 
-  function search(userInput) {
+  function updateSearch(userInput) {
     console.log('entered search in parent, userInput = ', userInput);
     setSearchTerm(userInput);
   }
 
-  // TODO: need filter function from API to show companies
-
   useEffect(function fetchAllCompaniesOnRender() {
     // console.debug("effect beg all companies = ", companies);
     async function fetchAllCompanies() {
-      console.log('searchTerm = ', searchTerm);
+      // console.log('searchTerm = ', searchTerm);
       const companies = await JoblyApi.getAllCompanies(searchTerm);
       // console.log("companies = ", companies);
       setCompanies(companies);
@@ -54,7 +58,7 @@ function CompanyList() {
 
   return (
     <div className="CompanyList">
-      <SearchForm search={search} />
+      <SearchForm updateSearch={updateSearch} inputName="name"/>
       {showCompanies}
     </div>
   );

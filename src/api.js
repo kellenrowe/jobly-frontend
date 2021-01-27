@@ -65,8 +65,15 @@ class JoblyApi {
    *  => { jobs: [ { id, title, salary, equity, companyHandle, companyName }, ...] }
    *  */
 
-  static async getAllJobs() {
-    let res = await this.request(`jobs/`);
+  static async getAllJobs(data) {
+    let res;
+
+    
+    if(data.title) {
+      res = await this.request(`jobs/`, data);
+    } else {
+      res = await this.request(`jobs/`);
+    }
     return res.jobs;
   }
 

@@ -1,5 +1,4 @@
 
-
 /** renders company card
  * 
  */

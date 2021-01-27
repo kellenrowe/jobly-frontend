@@ -20,6 +20,14 @@ function Routes({ updateUser, user }) {
     console.log('profileInfo in routes = ', profileInfo)
   }
 
+  // TODO: pass userJobs and updateJobs fn from App
+
+  let userJobs = [];
+
+  function updateJobs(jobId){
+    console.log("updateJobs called on ", jobId);
+  }
+
 return (
     <Switch>
       <Route exact path="/">
@@ -32,7 +40,7 @@ return (
         <CompanyDetail />
       </Route>
       <Route exact path="/jobs">
-        <JobList />
+        <JobList userJobs={userJobs} updateJobs={updateJobs}/>
       </Route>
       <Route exact path="/login">
         <LoginForm updateUser={updateUser}/>
