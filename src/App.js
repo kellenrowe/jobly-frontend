@@ -1,19 +1,44 @@
 import './App.css';
+// import "bootstrap/dist/css/bootstrap.css";
 
 // TODO: import functions from api.js
-
+import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import NavBar from "./NavBar";
 import Routes from "./Routes";
 
+/** renders App
+ * 
+ *  state:
+ *  - user: object like -
+ *  { username, 
+ *    firstName, 
+ *    lastName, 
+ *    isAdmin, 
+ *    jobs
+ *  } 
+ *  where jobs is array of job objects like:
+ *  { id, title, companyHandle, companyName, state }
+ * 
+ * 
+ *  
+ */
 function App() {
   // TODO: state: user
+  const [user, setUser] = useState()
+  console.log('top of App: User = ', user);
+
+  function updateUser(newUser) {
+    setUser(newUser);
+
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar />
-        <Routes />
+        <NavBar user={user}/>
+        <Routes updateUser={updateUser} user={user}/>
       </BrowserRouter>
     </div>
   );
