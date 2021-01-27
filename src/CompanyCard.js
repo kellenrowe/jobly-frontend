@@ -7,8 +7,9 @@ function CompanyCard({ company }) {
 console.log("rendering CompanyCard ", company);
   return (
     <div className="CompanyCard">
-      <h2>{company.title}</h2>
-      <img src="" alt="logo" ></img>
+      <h2>{company.name}</h2>
+      {/* TODO: update company logo */}
+      <img src={company.logoUrl} alt="logo" ></img>
       <p>{company.description}</p>
     </div>
   );

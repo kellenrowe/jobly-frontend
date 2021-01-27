@@ -14,7 +14,7 @@ function CompanyList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [companies, setCompanies] = useState({});
-  // TODO: Revisit companies - should be a state?
+  console.log("rendering companies = ", companies);
 
   function search(userInput) {
     setSearchTerm(userInput);
@@ -25,9 +25,9 @@ function CompanyList() {
   useEffect(function fetchAllCompaniesOnRender() {
     console.debug("effect beg all companies = ", companies);
     async function fetchAllCompanies() {
-      const result = await JoblyApi.getAllCompanies();
-      console.log("result = ", result);
-      setCompanies(result.companies);
+      const companies = await JoblyApi.getAllCompanies();
+      console.log("companies = ", companies);
+      setCompanies(companies);
       setIsLoading(false);
     }
     fetchAllCompanies();
@@ -35,21 +35,19 @@ function CompanyList() {
   }, []);
 
   if (isLoading) return <i>Loading...</i>
-  
-  const showCompanies = "no companies";
+
+  let showCompanies = "no companies";
 
   if (companies){
-    showCompanies = Object.values(companies).map(async function (c) {
-      const result = await JoblyApi.getCompany(c.handle);
-      let company = result.company;
+    showCompanies = companies.map(c =>
       (
         <div>
-          <Link to={`/companies/${company.name}`}>
-            <CompanyCard company={company} />
+          <Link to={`/companies/${c.handle}`}>
+            <CompanyCard company={c} />
           </Link>
         </div>
       )
-    });
+    );
   }
 
   return (
