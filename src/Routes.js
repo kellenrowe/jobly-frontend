@@ -37,7 +37,7 @@ return (
         <CompanyList />
       </Route>
       <Route exact path="/companies/:handle">
-        <CompanyDetail />
+        <CompanyDetail userJobs={userJobs} updateJobs={updateJobs}/>
       </Route>
       <Route exact path="/jobs">
         <JobList userJobs={userJobs} updateJobs={updateJobs}/>

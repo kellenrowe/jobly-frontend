@@ -46,13 +46,13 @@ function CompanyList() {
 
   if (companies){
     showCompanies = companies.map(c =>
-      (
-        <div key={c.handle}>
-          <Link to={`/companies/${c.handle}`}>
-           <CompanyCard company={c} />
-          </Link>
-        </div>
-      )
+    (
+      <div key={c.handle}>
+        <Link to={`/companies/${c.handle}`}>
+          <CompanyCard company={c} />
+        </Link>
+      </div>
+    )
     );
   }
 
