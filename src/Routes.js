@@ -17,7 +17,7 @@ import ProfileForm from "./ProfileForm";
  *  App -> Routes -> { Homepage, CompanyList, CompanyDetail, JobList, 
  *                      LoginForm, SignupForm, ProfileForm }
 */
-function Routes({ user, applyToJob }) {
+function Routes({ user, signupUser, loginUser, updateUser, applyToJob }) {
   let profileInfo = {};
 
   // temp hack meant to generate user data for profileForm
@@ -30,12 +30,12 @@ function Routes({ user, applyToJob }) {
 
   // TODO: pass userJobs and updateJobs fn from App
 
-  let userJobs = [];
+  let userJobs = user.jobs;
 
   /** update jobs-applied-to for current user */
-  function updateJobs(jobId){
-    console.log("updateJobs called on ", jobId);
-  }
+  // function updateJobs(jobId){
+  //   console.log("updateJobs called on ", jobId);
+  // }
 
 
 return (
@@ -47,20 +47,20 @@ return (
         <CompanyList />
       </Route>
       <Route exact path="/companies/:handle">
-        <CompanyDetail userJobs={userJobs} updateJobs={updateJobs}/>
+        <CompanyDetail userJobs={userJobs} applyToJob={applyToJob}/>
       </Route>
       <Route exact path="/jobs">
-        <JobList userJobs={userJobs} updateJobs={updateJobs}/>
+        <JobList userJobs={userJobs} applyToJob={applyToJob}/>
       </Route>
       <Route exact path="/login">
       //NOTE: app should have specific login function which we pass to login
-        <LoginForm updateUser={updateUser}/>
+        <LoginForm loginUser={loginUser}/>
       </Route>
       <Route exact path="/signup">
-        <SignupForm updateUser={updateUser}/>
+        <SignupForm signupUser={signupUser}/>
       </Route>
       <Route exact path="/profile">
-        <ProfileForm updateUser={updateUser} user={profileInfo}/>
+        <ProfileForm updateUser={updateUser} user={user}/>
       </Route>
     {/* 404 handler */}
       <Redirect to="/" />

@@ -4,14 +4,14 @@ import { useHistory } from "react-router-dom";
 /** Renders SignupForm component
  * 
  *  Props:
- *  - updateUser: fn passed from parent to update user data
+ *  - signupUser: fn passed from parent to update user data
  * 
  *  State:
  *  - formData: input recieved from user
  * 
  *  Routes -> SignupForm -> Alert
  *  */
-function SignupForm({ updateUser }) {
+function SignupForm({ signupUser }) {
   const initialState = {};
   const [formData, setFormData] = useState(initialState);
   const history = useHistory();
@@ -28,7 +28,7 @@ function SignupForm({ updateUser }) {
   /** handle signup of new user */
   function handleSubmit(evt) {
     evt.preventDefault();
-    updateUser(formData);
+    signupUser(formData);
     setFormData(initialState);
     history.push("/companies");
   }

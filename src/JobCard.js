@@ -8,17 +8,17 @@
  *  - isApplied is a Boolean value
  *      true, if user has applied to the job
  *      false, otherwise
- *  - updateJobs is a fn passed down by parent to update user's joblist
+ *  - applyToJob is a fn passed down by parent to update user's joblist
  * 
  *  JobCardList -> JobCard 
  */
 
-function JobCard({ job, isApplied, updateJobs }) {
+function JobCard({ job, isApplied, applyToJob }) {
   // console.debug("rendering JobCard ", job);
 
   /** updates user's list of applied jobs */
   function handleClick(evt) {
-    updateJobs(job.id);
+    applyToJob(job.id);
   }
 
   const showButton = ((!isApplied)

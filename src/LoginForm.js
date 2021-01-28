@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 /** Renders LoginForm component
  * 
  *  Props:
- *  - updateUser: fn passed from parent to update user data
+ *  - loginUser: fn passed from parent to update user data
  * 
  *  State:
  *  - formData: input recieved from user
@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
  *  
  * */
 
-function LoginForm({ updateUser }) {
+function LoginForm({ loginUser }) {
   const initialState = {};
   const [formData, setFormData] = useState(initialState);
   const history = useHistory();
@@ -30,7 +30,7 @@ function LoginForm({ updateUser }) {
   /** handles submission of form for user login */
   function handleSubmit(evt) {
     evt.preventDefault();
-    updateUser(formData);
+    loginUser(formData);
     setFormData(initialState);
     history.push("/companies");
   }

@@ -10,7 +10,7 @@ import SearchForm from "./SearchForm";
  *  Prop:
  *  - userJobs is an array of jobs that the user has applied to like
  *      [{ id, title, salary, equity }, ...]
- *  - updateJobs is a fn passed down by parent to update user's joblist
+ *  - applyToJob is a fn passed down by parent to update user's joblist
  * 
  *  State: 
  *  - searchTerm is a string input by user
@@ -20,7 +20,7 @@ import SearchForm from "./SearchForm";
  *  Routes -> JobList -> { SearchForm, JobCardList }
  *  */
 
-function JobList({ userJobs, updateJobs }) {
+function JobList({ userJobs, applyToJob }) {
   const [searchTerm, setSearchTerm] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [jobs, setJobs] = useState({});
@@ -49,7 +49,7 @@ function JobList({ userJobs, updateJobs }) {
     ? <JobCardList 
       jobs={jobs}
       userJobs={userJobs}
-      updateJobs={updateJobs}
+      applyToJob={applyToJob}
       /> 
     : "no jobs";
 

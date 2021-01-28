@@ -11,7 +11,7 @@ import JobCardList from "./JobCardList";
  *   where jobs is [{ id, title, salary, equity }, ...]
  *  - userJobs is an array of jobs that the user has applied to like
  *      [{ id, title, salary, equity }, ...]
- *  - updateJobs is a fn passed down by parent to update user's joblist
+ *  - applyToJob is a fn passed down by parent to update user's joblist
  * 
  *  State:
  *  - isLoading: Boolean value w/ default of true
@@ -22,7 +22,7 @@ import JobCardList from "./JobCardList";
  *  Routes -> CompanyDetail -> JobCardList
  *  */
 
-function CompanyDetail({ userJobs, updateJobs }) {
+function CompanyDetail({ userJobs, applyToJob }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [company, setCompany] = useState({});
@@ -32,16 +32,17 @@ function CompanyDetail({ userJobs, updateJobs }) {
 
   useEffect(function fetchCompanyOnRender() {
     async function fetchCompany() {
+      let resp;
       try {
-        const resp = await JoblyApi.getCompany(handle);
-        setCompany(resp);
-        setIsLoading(false);
+        resp = await JoblyApi.getCompany(handle);
         // console.log("resp = ", resp);
       } catch (err){
         // console.log("err", err);
         setIsError(true);
         // console.log("made it to error");
       } 
+      setCompany(resp);
+      setIsLoading(false);
     }
     fetchCompany();
   }, [handle]);
@@ -57,7 +58,7 @@ function CompanyDetail({ userJobs, updateJobs }) {
       <JobCardList
         jobs={company.jobs}
         userJobs={userJobs}
-        updateJobs={updateJobs}
+        applyToJob={applyToJob}
       />
     </div>
     : `No jobs for this company`;

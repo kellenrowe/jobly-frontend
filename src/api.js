@@ -77,15 +77,15 @@ class JoblyApi {
     return res.jobs;
   }
 
-  /** Register a user. 
+  /** Sign up a user. 
    *  
    * userData includes { username, password, firstName, lastName, email }
    * 
    * Returns JWT token which can be used to authenticate further requests.
    * */
 
-  static async registerUser(userData) {
-    let res = await this.request(`/auth/register`, userData, method = "post");
+  static async signupUser(userData) {
+    let res = await this.request(`/auth/register`, userData, "post");
     return res;
   }
 
@@ -98,7 +98,7 @@ class JoblyApi {
    * */
 
   static async loginUser(userData) {
-    let res = await this.request(`/auth/token`, userData, method = "post");
+    let res = await this.request(`/auth/token`, userData, "post");
     return res;
   }
 
@@ -115,7 +115,24 @@ class JoblyApi {
     return res.user;
   }
 
-  // TODO: updateUser function
+  /** PATCH /[username] { userData } => { user }
+   *
+   * userData can include:
+   *   { firstName, lastName, password, email }
+   *
+   * Returns { username, firstName, lastName, email, isAdmin }
+   *
+   * Authorization required: admin or same-user-as-:username
+   **/
+
+  static async updateUser(userData) {
+    let res = await this.request(
+      `/users/${userData.username}`,
+      userData,
+      "patch"
+    );
+    return res;
+  }
 
   /** POST /[username]/jobs/[id]  { state } => { application }
    *
@@ -128,7 +145,7 @@ class JoblyApi {
     let res = await this.request(
       `/users/${username}/jobs/${jobId}`,
       { username, jobId },
-      method = "post"
+      "post"
     );
     return res;
   }
