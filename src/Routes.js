@@ -17,7 +17,7 @@ import ProfileForm from "./ProfileForm";
  *  App -> Routes -> { Homepage, CompanyList, CompanyDetail, JobList, 
  *                      LoginForm, SignupForm, ProfileForm }
 */
-function Routes({ updateUser, user }) {
+function Routes({ user, applyToJob }) {
   let profileInfo = {};
 
   // temp hack meant to generate user data for profileForm

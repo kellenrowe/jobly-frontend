@@ -2,11 +2,11 @@ import { NavLink } from "react-router-dom";
 import "./NavBar.css"
 
 /** Renders NavBar component. 
- * 
+ *  TODO: update docstring
  *  props:
  *  - user: object containing data for current user
  */
-function NavBar({ user }){
+function NavBar({ user, signupUser, loginUser, logoutUser }){
 
 //NOTE: logout should be logout function, not just update user to null
 

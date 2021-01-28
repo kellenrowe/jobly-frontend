@@ -28,7 +28,7 @@ function JobList({ userJobs, updateJobs }) {
 
   function updateSearch(userInput) {
     // console.log('entered search in parent, userInput = ', userInput);
-    setSearchTerm(userInput);
+    setSearchTerm({ title: userInput });
   }
 
   useEffect(function fetchAllJobsOnRender() {

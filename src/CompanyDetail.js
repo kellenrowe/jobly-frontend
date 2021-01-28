@@ -15,6 +15,7 @@ import JobCardList from "./JobCardList";
  * 
  *  State:
  *  - isLoading: Boolean value w/ default of true
+ *  - isError: Boolean value w/ default of false
  *  - company: object like
  *    { handle, name, description, numEmployees, logoUrl, jobs }
  *
@@ -23,6 +24,7 @@ import JobCardList from "./JobCardList";
 
 function CompanyDetail({ userJobs, updateJobs }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [company, setCompany] = useState({});
   const { handle } = useParams();
 
@@ -34,13 +36,17 @@ function CompanyDetail({ userJobs, updateJobs }) {
         const resp = await JoblyApi.getCompany(handle);
         setCompany(resp);
         setIsLoading(false);
-      } catch (err) {
-        // NOTE: why isn't this working?
-        <Redirect to="/companies" />
-      }
+        // console.log("resp = ", resp);
+      } catch (err){
+        // console.log("err", err);
+        setIsError(true);
+        // console.log("made it to error");
+      } 
     }
     fetchCompany();
   }, [handle]);
+
+  if (isError) return <Redirect to="/companies" />;
 
   if (isLoading) return <i>Loading...</i>;
 
@@ -55,7 +61,7 @@ function CompanyDetail({ userJobs, updateJobs }) {
       />
     </div>
     : `No jobs for this company`;
-// NOTE: bad param isnt handled ALSO handle no key for child
+
   return (
     <div className="CompanyDetail">
       {showJobs}

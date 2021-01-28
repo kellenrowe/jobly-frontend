@@ -24,7 +24,7 @@ function CompanyList() {
 
   function updateSearch(userInput) {
     // console.log('entered search in parent, userInput = ', userInput);
-    setSearchTerm(userInput);
+    setSearchTerm({ name: userInput });
   }
 
   useEffect(function fetchAllCompaniesOnRender() {

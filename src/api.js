@@ -20,8 +20,8 @@ class JoblyApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -44,7 +44,7 @@ class JoblyApi {
     let res = await this.request(`companies/${handle}`);
     return res.company;
   }
-  
+
   /** Get all companies. 
    *  
    *  => { companies: [ { handle, name, description, numEmployees, logoUrl }, ...] }
@@ -68,8 +68,8 @@ class JoblyApi {
   static async getAllJobs(data) {
     let res;
 
-    
-    if(data.title) {
+
+    if (data.title) {
       res = await this.request(`jobs/`, data);
     } else {
       res = await this.request(`jobs/`);
@@ -77,22 +77,68 @@ class JoblyApi {
     return res.jobs;
   }
 
-  /** Get a user. 
+  /** Register a user. 
    *  
-   * Returns { username, firstName, lastName, isAdmin, jobs }
-   * where jobs is { id, title, companyHandle, companyName, state }
+   * userData includes { username, password, firstName, lastName, email }
+   * 
+   * Returns JWT token which can be used to authenticate further requests.
    * */
 
+  static async registerUser(userData) {
+    let res = await this.request(`/auth/register`, userData, method = "post");
+    return res;
+  }
+
+  /** Login a user. 
+   *  
+   *  Sends userData { username, password }
+   * 
+   *  Returns JWT token: { token }
+   * 
+   * */
+
+  static async loginUser(userData) {
+    let res = await this.request(`/auth/token`, userData, method = "post");
+    return res;
+  }
+
+  /** GET /[username] => { user }
+   *
+   * Returns { username, firstName, lastName, isAdmin, jobs }
+   *   where jobs is { id, title, companyHandle, companyName, state }
+   *
+   * Authorization required: admin or same user-as-:username
+   **/
+
   static async getUser(username) {
-    let res = await this.request(`users/${username}`);
+    let res = await this.request(`/users/${username}`);
     return res.user;
+  }
+
+  // TODO: updateUser function
+
+  /** POST /[username]/jobs/[id]  { state } => { application }
+   *
+   * Returns {"applied": jobId}
+   *
+   * Authorization required: admin or same-user-as-:username
+   * */
+
+  static async applyToJob(username, jobId) {
+    let res = await this.request(
+      `/users/${username}/jobs/${jobId}`,
+      { username, jobId },
+      method = "post"
+    );
+    return res;
   }
 
 }
 
+// TODO: get rid of this later
 // for now, put token ("testuser" / "password" on class)
 JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
 export default JoblyApi;

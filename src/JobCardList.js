@@ -23,7 +23,7 @@ function JobCardList({ jobs, userJobs, updateJobs }) {
     let isApplied = userJobs.some(e => e.id === job.id);
 
     return (
-      <div className="JobCardList-job">
+      <div className="JobCardList-job" key={job.id}>
         <JobCard job={job} isApplied={isApplied} updateJobs={updateJobs} />
       </div>
     );

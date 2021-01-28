@@ -4,8 +4,6 @@ import { useState } from "react";
  * 
  *  Prop:
  *  - updateSearch fn passed down by parent
- *  - inputName is a string of either "name" or "title" 
- *    (if searching by CompanyList or JobLIst, respectively)
  * 
  *  State: 
  *  - formData: input recieved from user
@@ -13,7 +11,7 @@ import { useState } from "react";
  *  { CompanyList, JobList } -> SearchForm
  *  */
 
-function SearchForm({ updateSearch, inputName }) {
+function SearchForm({ updateSearch }) {
   const initialState = {};
   const [formData, setFormData] = useState(initialState);
 
@@ -30,7 +28,7 @@ function SearchForm({ updateSearch, inputName }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     // console.log('formData = ', formData);
-    updateSearch(formData);
+    updateSearch(formData.queryString);
     setFormData(initialState);
   }
 // TODO name should be static string
@@ -39,7 +37,7 @@ function SearchForm({ updateSearch, inputName }) {
       <div className="form-group">
         <input
           placeholder="Enter search term.."
-          name={inputName}
+          name="queryString"
           className="form-control"
           onChange={handleChange}
         />
