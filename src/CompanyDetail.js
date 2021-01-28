@@ -9,8 +9,8 @@ import JobCardList from "./JobCardList";
  *  - company: object like -
  *  { handle, name, description, numEmployees, logoUrl, jobs }
  *   where jobs is [{ id, title, salary, equity }, ...]
- *  - userJobs is an array of jobs that the user has applied to like
- *      [{ id, title, salary, equity }, ...]
+ *  - userJobs is an array of job ids that the user has applied to like
+ *      [id, ...]
  *  - applyToJob is a fn passed down by parent to update user's joblist
  * 
  *  State:
@@ -28,20 +28,14 @@ function CompanyDetail({ userJobs, applyToJob }) {
   const [company, setCompany] = useState({});
   const { handle } = useParams();
 
-  // console.log('handle = ', handle);
-
   useEffect(function fetchCompanyOnRender() {
     async function fetchCompany() {
-      let resp;
       try {
-        resp = await JoblyApi.getCompany(handle);
-        // console.log("resp = ", resp);
-      } catch (err){
-        // console.log("err", err);
+        const resp = await JoblyApi.getCompany(handle);
+        setCompany(resp);
+      } catch (err) {
         setIsError(true);
-        // console.log("made it to error");
-      } 
-      setCompany(resp);
+      }
       setIsLoading(false);
     }
     fetchCompany();

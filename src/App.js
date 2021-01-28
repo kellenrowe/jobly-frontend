@@ -10,17 +10,26 @@ import NavBar from "./NavBar";
 import Routes from "./Routes";
 
 /** Renders Jobly App
- * TODO: update docstring
+ * 
  *  state:
  *  - user: object like -
- *  { username, 
- *    firstName, 
- *    lastName, 
- *    isAdmin, 
- *    jobs
- *  } 
- *  where jobs is array of job objects like:
- *  { id, title, companyHandle, companyName, state }
+ *      { username, 
+ *        firstName, 
+ *        lastName, 
+ *        isAdmin, 
+ *        applications
+ *      } 
+ *    where applications is array of job ids like:
+ *      [ id, etc. ]
+ *  - userInputs: object like 
+ *      if signing up, { username, password, firstName, lastName, email}
+ *      if logging in, { username, password }
+ *      if updating user, { firstName, lastName, email, password } 
+ *  - token: string of JWT token for user
+ *  - error: array of error messages
+ *  - isSigningUp: Boolean, true if user is signing up
+ *  - isLoggingIn: Boolean, true if user is logging in
+ *  - isUpdating: Boolean, true if user is updating
  * 
  *  App -> { NavBar, Routes }
  */
@@ -35,28 +44,28 @@ function App() {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   // const [isApplying, setIsApplying] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  // const [isSuccess, setIsSuccess] = useState(false);
   JoblyApi.token = token;
 
-  console.log('App rendering: User = ', user);
-
-  /** Sign up user by using provided userData */
-  // currUser includes { username, password, firstName, lastName, email }
+  /** Sign up user by using provided userData like
+   *  { username, password, firstName, lastName, email } 
+   *  */
   function signupUser(userInputs) {
-    // console.log('signupUser: userInputs = ', userInputs);
     setUserInputs(userInputs);
     setIsSigningUp(true);
   }
 
-  /** Login user by using provided userData */
-  // userData { username, password }
+  /** Login user by using provided userData like 
+   *  { username, password }
+   * */
   function loginUser(userInputs) {
     setUserInputs(userInputs);
     setIsLoggingIn(true);
   }
 
-  /** Login user by using provided userData */
-  // userData { username, password }
+  /** TODO: Update user by using provided userData like
+   *  { firstName, lastName, password, email }
+   *  */
   function updateUser(userInputs) {
     // setUserInputs(userInputs);
     // setIsUpdating(true);
@@ -64,44 +73,38 @@ function App() {
 
   /** Logout user by returning user to initialState */
   function logoutUser() {
-    console.debug('logoutUser')
     setUser({});
     setUserInputs({});
     setToken("")
-    setIsSuccess(false);
+    // setIsSuccess(false);
   }
 
-  /** Adds job applied to user */
+  /** TODO: Adds job applied to user */
   function applyToJob(jobId) {
-    //TODO: move to useEffect
     console.log("applied to ", jobId);
     // setAppliedJob(jobId);
-      // setIsApplying(true);
+    // setIsApplying(true);
   }
 
-  /** get a token for login, register, or updated profile of user with userinnputs */
+  /** Get a token for login, register, or updated profile of user with userinnputs */
   useEffect(function fetchTokenOnRender() {
-    // console.debug("effect beg token = ", token);
     async function fetchToken() {
-      let resp = "";
       try {
         if (isSigningUp === true) {
-          // console.log('isSignedup');
-          resp = await JoblyApi.signupUser(userInputs);
-          setIsSuccess(true);
+          let resp = await JoblyApi.signupUser(userInputs);
           resp = resp.token;
+          setToken(resp);
+          // setIsSuccess(true);
         }
         if (isLoggingIn === true) {
-          // console.log('isLoggingIn');
-          resp = await JoblyApi.loginUser(userInputs);
-          setIsSuccess(true);
+          let resp = await JoblyApi.loginUser(userInputs);
           resp = resp.token;
-        } 
+          setToken(resp);
+          // setIsSuccess(true);
+        }
       } catch (err) {
         setError(err);
       }
-      // console.log('token = ', resp)
-      setToken(resp);
       setIsSigningUp(false);
       setIsLoggingIn(false);
     }
@@ -110,14 +113,10 @@ function App() {
 
   /** get user information for current username */
   useEffect(function fetchUserOnRender() {
-    // console.debug("effect beg user = ", user);
     async function fetchUser() {
       try {
         if ((isUpdating === false) && (token.length !== 0)) {
-          // console.log('userInputs.username', userInputs.username);
-          // console.log("token = ", token);
           const newUser = await JoblyApi.getUser(userInputs.username);
-          console.log("newUser = ", newUser);
           setUser(newUser.user);
         }
       } catch (err) {
@@ -129,7 +128,6 @@ function App() {
 
   /** update user when profile form is submitted  */
   // useEffect(function fetchUserOnProfileUpdate() {
-  //   // console.debug("effect beg user = ", user);
   //   async function fetchUserProfileUpdate() {
   //     try {
   //       await JoblyApi.updateUser(userInputs);
@@ -143,7 +141,6 @@ function App() {
 
   /** apply to job if user clicks on "apply" button */
   // useEffect(function applyToJobOnClick() {
-  //   // console.debug("effect beg user = ", user);
   //   async function applyToJob() {
   //     let resp;
   //     try {
@@ -151,37 +148,33 @@ function App() {
   //     } catch (err) {
   //       setError(err);
   //     }
-
   //   }
   //   fetchUpdatedUser();
   // }, [isApplying]);
 
 
-  // TODO:
+  // TODO: Show error messages to user
   if (error) console.log(error);
 
-  //   // TODO:
-  //   if (isSuccess) // DO something
+  // TODO: Incorporate a message for successful login or register of user
+  // if (isSuccess)
 
-
-      return (
-        <div className="App">
-          <BrowserRouter>
-            <NavBar user={user}
-              signupUser={signupUser}
-              loginUser={loginUser}
-              logoutUser={logoutUser}
-            />
-            <Routes
-              user={user}
-              signupUser={signupUser}
-              loginUser={loginUser}
-              updateUser={updateUser}
-              applyToJob={applyToJob}
-            />
-          </BrowserRouter>
-        </div>
-      );
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <NavBar user={user}
+          logoutUser={logoutUser}
+        />
+        <Routes
+          user={user}
+          signupUser={signupUser}
+          loginUser={loginUser}
+          updateUser={updateUser}
+          applyToJob={applyToJob}
+        />
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

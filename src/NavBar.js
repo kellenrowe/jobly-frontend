@@ -2,20 +2,22 @@ import { NavLink, useHistory } from "react-router-dom";
 import "./NavBar.css"
 
 /** Renders NavBar component. 
- *  TODO: update docstring
- *  props:
+ *  
+ *  Props:
  *  - user: object containing data for current user
+ *  - logoutUser: fn passed down by parent (App) to handle logging out user
+ * 
+ *  App -> { NavBar, Routes }
  */
-function NavBar({ user, signupUser, loginUser, logoutUser }) {
+function NavBar({ user, logoutUser }) {
   const history = useHistory();
-  // console.log('user = ', user)
-//NOTE: logout should be logout function, not just update user to null
-  
+
+  /** Handle click for logging out a user and redirect to Homepage */
   function handleClick() {
     logoutUser();
     history.push("/");
   }
-  
+
   const navbar = Object.keys(user).length !== 0
     ? <div>
       <NavLink exact to="/">Jobly</NavLink>
@@ -31,8 +33,6 @@ function NavBar({ user, signupUser, loginUser, logoutUser }) {
       <NavLink to="/login">Login</NavLink>
       <NavLink to="/signup">Sign Up</NavLink>
     </div>
-
-  
 
   return (
     <nav className="NavBar">

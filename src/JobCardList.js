@@ -7,16 +7,14 @@ import JobCard from "./JobCard";
  *      [{ id, title, salary, equity }, ...]  from CompanyDetail or
  *      [{ id, title, salary, equity, companyHandle, companyName }, ...] 
  *          from JobCardList
- *  - userJobs is an array of jobs that the user has applied to like
- *      [{ id, title, salary, equity }, ...]
+ *  - userJobs is an array of job ids that the user has applied to like
+ *      [ id, ...]
  *  - updateJobs is a fn passed down by parent to update user's joblist
  * 
  *  { CompanyDetail, JobList } -> JobCardList -> JobCard
  *  */
 
-function JobCardList({ jobs, userJobs, updateJobs }) {
-  // console.debug("rendering JobCardList ", jobs);
-
+function JobCardList({ jobs, userJobs, applyToJob }) {
   // Loop through each job in the jobs array and identify if job isApplied
   // to create JobCard for each job
   const showJobs = jobs.map(job => {
@@ -27,7 +25,7 @@ function JobCardList({ jobs, userJobs, updateJobs }) {
 
     return (
       <div className="JobCardList-job" key={job.id}>
-        <JobCard job={job} isApplied={isApplied} updateJobs={updateJobs} />
+        <JobCard job={job} isApplied={isApplied} applyToJob={applyToJob} />
       </div>
     );
   });

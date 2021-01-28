@@ -24,19 +24,14 @@ function JobList({ userJobs, applyToJob }) {
   const [searchTerm, setSearchTerm] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [jobs, setJobs] = useState({});
-  // console.log("rendering jobs = ", jobs);
 
   function updateSearch(userInput) {
-    // console.log('entered search in parent, userInput = ', userInput);
     setSearchTerm({ title: userInput });
   }
 
   useEffect(function fetchAllJobsOnRender() {
-    // console.debug("effect beg all jobs = ", jobs);
     async function fetchAllJobs() {
-      // console.log('searchTerm = ', searchTerm);
       const jobs = await JoblyApi.getAllJobs(searchTerm);
-      // console.log("jobs = ", jobs);
       setJobs(jobs);
       setIsLoading(false);
     }
@@ -46,16 +41,16 @@ function JobList({ userJobs, applyToJob }) {
   if (isLoading) return <i>Loading...</i>
 
   const showJobs = jobs
-    ? <JobCardList 
+    ? <JobCardList
       jobs={jobs}
       userJobs={userJobs}
       applyToJob={applyToJob}
-      /> 
+    />
     : "no jobs";
 
   return (
     <div className="JobList">
-      <SearchForm updateSearch={updateSearch} inputName="title"/>
+      <SearchForm updateSearch={updateSearch} inputName="title" />
       {showJobs}
     </div>
   );

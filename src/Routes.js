@@ -11,27 +11,23 @@ import ProfileForm from "./ProfileForm";
 /** Renders Routes component. 
  * 
  *  Props: 
- *  - updateUser: fn passed from parent to update user data
  *  - user: object with current user data
+ *  - signupUser: fn passed from parent (App) to sign up user data
+ *  - loginUser: fn passed from parent (App) to login user data
+ *  - updateUser: fn passed from parent (App) to update user data
+ *  - applyToJob: fn passed from parent (App) to apply to a job
  * 
  *  App -> Routes -> { Homepage, CompanyList, CompanyDetail, JobList, 
  *                      LoginForm, SignupForm, ProfileForm }
 */
 function Routes({ user, signupUser, loginUser, updateUser, applyToJob }) {
 
-  let userJobs = [];
-  if (Object.keys(user).length !== 0) {
-    userJobs = user.applications;
-  }
-  console.log('userJobs = ', userJobs);
+  // Grab job ids that user has applied to 
+  const userJobs = (Object.keys(user).length !== 0)
+    ? user.applications
+    : [];
 
-  /** update jobs-applied-to for current user */
-  // function updateJobs(jobId){
-  //   console.log("updateJobs called on ", jobId);
-  // }
-
-
-return (
+  return (
     <Switch>
       <Route exact path="/">
         <Homepage />
@@ -40,25 +36,24 @@ return (
         <CompanyList />
       </Route>
       <Route exact path="/companies/:handle">
-        <CompanyDetail userJobs={userJobs} applyToJob={applyToJob}/>
+        <CompanyDetail userJobs={userJobs} applyToJob={applyToJob} />
       </Route>
       <Route exact path="/jobs">
-        <JobList userJobs={userJobs} applyToJob={applyToJob}/>
+        <JobList userJobs={userJobs} applyToJob={applyToJob} />
       </Route>
       <Route exact path="/login">
-      {/*NOTE: app should have specific login function which we pass to login*/}
-        <LoginForm loginUser={loginUser}/>
+        <LoginForm loginUser={loginUser} />
       </Route>
       <Route exact path="/signup">
-        <SignupForm signupUser={signupUser}/>
+        <SignupForm signupUser={signupUser} />
       </Route>
       <Route exact path="/profile">
-        <ProfileForm updateUser={updateUser} user={user}/>
+        <ProfileForm updateUser={updateUser} user={user} />
       </Route>
-    {/* 404 handler */}
+      {/* 404 handler */}
       <Redirect to="/" />
     </Switch>
-);
+  );
 }
 
 export default Routes;

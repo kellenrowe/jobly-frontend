@@ -14,8 +14,7 @@
  */
 
 function JobCard({ job, isApplied, applyToJob }) {
-  // console.debug("rendering JobCard ", job);
-
+  
   /** updates user's list of applied jobs */
   function handleClick(evt) {
     applyToJob(job.id);
@@ -26,11 +25,14 @@ function JobCard({ job, isApplied, applyToJob }) {
     : <button >APPLIED</button>
   );
 
-// TODO: fix winnie's inconsistent ternary
+  const showCompanyName = job.companyHandle
+    ? job.companyName
+    : null;
+
   return (
     <div className="JobCard">
       <h2>{job.title}</h2>
-      {(job.companyHandle) ? <h3>{job.companyName}</h3> : null}
+      {showCompanyName}
       <p>Salary: {job.salary}</p>
       <p>Equity: {job.equity}</p>
       {showButton}
