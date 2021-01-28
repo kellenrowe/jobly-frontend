@@ -37,11 +37,13 @@ function App() {
   // const [isApplying, setIsApplying] = useState(false);
   // const [isSuccess, setIsSuccess] = useState(false);
   JoblyApi.token = token;
-  // console.log('App rendering: User = ', user);
+
+  console.log('App rendering: User = ', user);
 
   /** Sign up user by using provided userData */
   // currUser includes { username, password, firstName, lastName, email }
   function signupUser(userInputs) {
+    // console.log('signupUser: userInputs = ', userInputs);
     setUserInputs(userInputs);
     setIsSigningUp(true);
   }
@@ -49,22 +51,23 @@ function App() {
   /** Login user by using provided userData */
   // userData { username, password }
   function loginUser(userInputs) {
-    setUserInputs(userInputs);
-    setIsLoggingIn(true);
+    // setUserInputs(userInputs);
+    // setIsLoggingIn(true);
   }
 
   /** Login user by using provided userData */
   // userData { username, password }
   function updateUser(userInputs) {
-    setUserInputs(userInputs);
-    setIsUpdating(true);
+    // setUserInputs(userInputs);
+    // setIsUpdating(true);
   }
 
   /** Logout user by returning user to initialState */
   function logoutUser() {
-    setUser({});
-    setUserInputs({});
-    setToken("")
+    console.debug('logoutUser')
+    // setUser({});
+    // setUserInputs({});
+    // setToken("")
     // setIsSuccess(false);
   }
 
@@ -83,16 +86,20 @@ function App() {
       let resp;
       try {
         if (isSigningUp === true) {
+          console.log('isSignedup');
           resp = await JoblyApi.signupUser(userInputs);
           // setIsSuccess(true);
+          resp = resp.token;
         }
         if (isLoggingIn === true) {
+          console.log('isLoggingIn');
           resp = await JoblyApi.loginUser(userInputs);
           // setIsSuccess(true);
         } 
       } catch (err) {
         setError(err);
       }
+      // console.log('token = ', resp)
       setToken(resp);
       setIsSigningUp(false);
       setIsLoggingIn(false);
@@ -106,8 +113,10 @@ function App() {
     async function fetchUser() {
       try {
         if (isUpdating === false) {
+          // console.log('userInputs.username', userInputs.username);
           const newUser = await JoblyApi.getUser(userInputs.username);
-          setUser(newUser);
+          console.log("newUser = ", newUser);
+          setUser(newUser.user);
         }
       } catch (err) {
         setError(err);
@@ -117,18 +126,18 @@ function App() {
   }, [token, isUpdating]);
 
   /** update user when profile form is submitted  */
-  useEffect(function fetchUserOnProfileUpdate() {
-    // console.debug("effect beg user = ", user);
-    async function fetchUserProfileUpdate() {
-      try {
-        await JoblyApi.updateUser(userInputs);
-      } catch (err){
-        setError(err);
-      }
-      setIsUpdating(false);
-    }
-    fetchUserProfileUpdate();
-  }, [userInputs]);
+  // useEffect(function fetchUserOnProfileUpdate() {
+  //   // console.debug("effect beg user = ", user);
+  //   async function fetchUserProfileUpdate() {
+  //     try {
+  //       await JoblyApi.updateUser(userInputs);
+  //     } catch (err){
+  //       setError(err);
+  //     }
+  //     setIsUpdating(false);
+  //   }
+  //   fetchUserProfileUpdate();
+  // }, [userInputs]);
 
   /** apply to job if user clicks on "apply" button */
   // useEffect(function applyToJobOnClick() {

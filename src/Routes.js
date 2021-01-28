@@ -53,7 +53,7 @@ return (
         <JobList userJobs={userJobs} applyToJob={applyToJob}/>
       </Route>
       <Route exact path="/login">
-      //NOTE: app should have specific login function which we pass to login
+      {/*NOTE: app should have specific login function which we pass to login*/}
         <LoginForm loginUser={loginUser}/>
       </Route>
       <Route exact path="/signup">

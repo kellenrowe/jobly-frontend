@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./NavBar.css"
 
 /** Renders NavBar component. 
@@ -6,20 +6,37 @@ import "./NavBar.css"
  *  props:
  *  - user: object containing data for current user
  */
-function NavBar({ user, signupUser, loginUser, logoutUser }){
-
+function NavBar({ user, signupUser, loginUser, logoutUser }) {
+  const history = useHistory();
+  // console.log('user = ', user)
 //NOTE: logout should be logout function, not just update user to null
-
-  return (
-    <nav className="NavBar">
+  
+  function handleClick() {
+    logoutUser();
+    history.push("/");
+  }
+  
+  const navbar = Object.keys(user).length !== 0
+    ? <div>
       <NavLink exact to="/">Jobly</NavLink>
-      {/* NOTE: in ternary once we have user data */}
       <NavLink to="/companies">Companies</NavLink>
       <NavLink to="/jobs">Jobs</NavLink>
       <NavLink exact to="/profile">Profile</NavLink>
       <NavLink to="/">
-        <button >Logout</button>
+        <button onClick={handleClick}>Logout {user.firstName}</button>
       </NavLink>
+    </div>
+    : <div>
+      <NavLink exact to="/">Jobly</NavLink>
+      <NavLink to="/login">Login</NavLink>
+      <NavLink to="/signup">Sign Up</NavLink>
+    </div>
+
+  
+
+  return (
+    <nav className="NavBar">
+      {navbar}
     </nav>
   );
 }
