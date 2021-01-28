@@ -30,7 +30,7 @@ function JobCard({ job, isApplied, applyToJob }) {
     : null;
 
   return (
-    <div className="JobCard">
+    <div className="JobCard border border-primary">
       <h2>{job.title}</h2>
       {showCompanyName}
       <p>Salary: {job.salary}</p>

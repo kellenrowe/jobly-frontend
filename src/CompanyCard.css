@@ -1,0 +1,9 @@
+.compName {
+    display: inline;
+}
+.compLogo {
+    /* display: inline; */
+    position: absolute;
+    top: 0;
+    right: 0;
+}
