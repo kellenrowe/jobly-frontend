@@ -35,7 +35,7 @@ function App() {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   // const [isApplying, setIsApplying] = useState(false);
-  // const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   JoblyApi.token = token;
 
   console.log('App rendering: User = ', user);
@@ -51,8 +51,8 @@ function App() {
   /** Login user by using provided userData */
   // userData { username, password }
   function loginUser(userInputs) {
-    // setUserInputs(userInputs);
-    // setIsLoggingIn(true);
+    setUserInputs(userInputs);
+    setIsLoggingIn(true);
   }
 
   /** Login user by using provided userData */
@@ -65,10 +65,10 @@ function App() {
   /** Logout user by returning user to initialState */
   function logoutUser() {
     console.debug('logoutUser')
-    // setUser({});
-    // setUserInputs({});
-    // setToken("")
-    // setIsSuccess(false);
+    setUser({});
+    setUserInputs({});
+    setToken("")
+    setIsSuccess(false);
   }
 
   /** Adds job applied to user */
@@ -83,18 +83,19 @@ function App() {
   useEffect(function fetchTokenOnRender() {
     // console.debug("effect beg token = ", token);
     async function fetchToken() {
-      let resp;
+      let resp = "";
       try {
         if (isSigningUp === true) {
-          console.log('isSignedup');
+          // console.log('isSignedup');
           resp = await JoblyApi.signupUser(userInputs);
-          // setIsSuccess(true);
+          setIsSuccess(true);
           resp = resp.token;
         }
         if (isLoggingIn === true) {
-          console.log('isLoggingIn');
+          // console.log('isLoggingIn');
           resp = await JoblyApi.loginUser(userInputs);
-          // setIsSuccess(true);
+          setIsSuccess(true);
+          resp = resp.token;
         } 
       } catch (err) {
         setError(err);
@@ -112,8 +113,9 @@ function App() {
     // console.debug("effect beg user = ", user);
     async function fetchUser() {
       try {
-        if (isUpdating === false) {
+        if ((isUpdating === false) && (token.length !== 0)) {
           // console.log('userInputs.username', userInputs.username);
+          // console.log("token = ", token);
           const newUser = await JoblyApi.getUser(userInputs.username);
           console.log("newUser = ", newUser);
           setUser(newUser.user);

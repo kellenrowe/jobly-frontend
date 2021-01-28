@@ -18,19 +18,12 @@ import ProfileForm from "./ProfileForm";
  *                      LoginForm, SignupForm, ProfileForm }
 */
 function Routes({ user, signupUser, loginUser, updateUser, applyToJob }) {
-  let profileInfo = {};
 
-  // temp hack meant to generate user data for profileForm
-  if (user) {
-    Object.keys(user).forEach(key => { 
-      if (key !== "jobs") return profileInfo[key] = user[key];
-    });
-    // console.log('profileInfo in routes = ', profileInfo)
+  let userJobs = [];
+  if (Object.keys(user).length !== 0) {
+    userJobs = user.applications;
   }
-
-  // TODO: pass userJobs and updateJobs fn from App
-
-  let userJobs = user.jobs;
+  console.log('userJobs = ', userJobs);
 
   /** update jobs-applied-to for current user */
   // function updateJobs(jobId){

@@ -20,7 +20,10 @@ function JobCardList({ jobs, userJobs, updateJobs }) {
   // Loop through each job in the jobs array and identify if job isApplied
   // to create JobCard for each job
   const showJobs = jobs.map(job => {
-    let isApplied = userJobs.some(e => e.id === job.id);
+    let isApplied = false;
+    if (userJobs.length !== 0) {
+      isApplied = userJobs.some(e => e.id === job.id);
+    }
 
     return (
       <div className="JobCardList-job" key={job.id}>
