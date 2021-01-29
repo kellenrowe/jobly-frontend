@@ -1,5 +1,8 @@
+// http://one-insect.surge.sh/ -> current URL
 import './App.css';
 import "bootstrap/dist/css/bootstrap.css";
+
+// NOTE: fix nav bold when active, homepage, buttons, color scheme
 
 import JoblyApi from "./api";
 
@@ -34,7 +37,7 @@ import Routes from "./Routes";
  *  App -> { NavBar, Routes }
  */
 function App() {
-  // NOTE: Question about number of states?
+
   const [user, setUser] = useState(null);
   const [userInputs, setUserInputs] = useState({});
   // const [appliedJob, setAppliedJob] = useState({});

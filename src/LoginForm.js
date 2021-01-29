@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./Form.css";
+import "./forms.css";
 
 /** Renders LoginForm component
  *
@@ -38,10 +38,10 @@ function LoginForm({ loginUser }) {
 
   return (
     <form
-      className="LoginForm mx-auto col-10 col-sm-8 col-md-6 mt-5"
+      className="LoginForm mx-auto col-10 col-sm-8 col-md-6 col-lg-4 mt-5"
       onSubmit={handleSubmit}
     >
-      <div className="form-group formField">
+      <div className="form-group formField mb-4">
         <input
           required
           name="username"
@@ -52,7 +52,7 @@ function LoginForm({ loginUser }) {
           Username
         </label>
       </div>
-      <div className="form-group formField">
+      <div className="form-group formField mb-4">
         <input
           required
           type="password"

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./Form.css";
+import "./forms.css";
 
 /** Renders ProfileForm component
  *
@@ -39,48 +39,48 @@ function ProfileForm({ updateUser, user }) {
 
   return (
     <form
-      className="ProfileForm mx-auto col-10 col-sm-8 col-md-6 mt-5"
+      className="ProfileForm mx-auto col-10 col-sm-8 col-md-6 col-lg-4 mt-5"
       onSubmit={handleSubmit}
     >
       <div className="form-group">
         <label htmlFor="username">
-          <b>Username: </b>{user.username}
+          <b>Username: </b>{formData.username}
         </label>
       </div>
-      <div className="form-group formField mt-4">
+      <div className="form-group formField mt-4 mb-4">
         <input
           required
           id="profileForm-firstName"
-          value={user.firstName}
+          value={formData.firstName}
           name="firstName"
           className="formInput"
           onChange={handleChange}
         />
         <label className="formLabel" htmlFor="profileForm-firstName">First Name</label>
       </div>
-      <div className="form-group formField mt-4">
+      <div className="form-group formField mb-4">
         <input
           required
           id="profileForm-lastName"
-          value={user.lastName}
+          value={formData.lastName}
           name="lastName"
           className="formInput"
           onChange={handleChange}
         />
         <label className="formLabel" htmlFor="profileForm-lastName">Last Name</label>
       </div>
-      <div className="form-group formField mt-4">
+      <div className="form-group formField mb-4">
         <input
           required
           id="profileForm-email"
-          value={user.email}
+          value={formData.email}
           name="email"
           className="formInput"
           onChange={handleChange}
         />
         <label className="formLabel" htmlFor="profileForm-email">Email</label>
       </div>
-      <div className="form-group formField mt-4">
+      <div className="form-group formField mb-4">
         <input
           required
           id="profileForm-password"

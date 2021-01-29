@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./Form.css";
+import "./forms.css";
 
 /** Renders SignupForm component
  *
@@ -36,10 +36,10 @@ function SignupForm({ signupUser }) {
 
   return (
     <form
-      className="SignupForm mx-auto col-10 col-sm-8 col-md-6 mt-5"
+      className="SignupForm mx-auto col-10 col-sm-8 col-md-6 col-lg-4 mt-5"
       onSubmit={handleSubmit}
     >
-      <div className="form-group formField">
+      <div className="form-group formField mb-4">
         <input
           required
           id="signUpForm-username"
@@ -51,7 +51,7 @@ function SignupForm({ signupUser }) {
           Username
         </label>
       </div>
-      <div className="form-group formField">
+      <div className="form-group formField mb-4">
         <input
           required
           id="signUpForm-password"
@@ -64,7 +64,7 @@ function SignupForm({ signupUser }) {
           Password
         </label>
       </div>
-      <div className="form-group formField">
+      <div className="form-group formField mb-4">
         <input
           required
           id="signUpForm-firstName"
@@ -76,7 +76,7 @@ function SignupForm({ signupUser }) {
           First Name
         </label>
       </div>
-      <div className="form-group formField">
+      <div className="form-group formField mb-4">
         <input
           required
           id="signUpForm-lastName"
@@ -88,7 +88,7 @@ function SignupForm({ signupUser }) {
           Last Name
         </label>
       </div>
-      <div className="form-group formField">
+      <div className="form-group formField mb-4">
         <input
           required
           id="signUpForm-email"
