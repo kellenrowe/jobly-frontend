@@ -92,6 +92,7 @@ function App() {
       try {
         if (isSigningUp === true) {
           let resp = await JoblyApi.signupUser(userInputs);
+          // TODO: consider naming here for resp
           resp = resp.token;
           setToken(resp);
           // setIsSuccess(true);
@@ -108,10 +109,12 @@ function App() {
       setIsSigningUp(false);
       setIsLoggingIn(false);
     }
+    // TODO: move states to dependencies 
     fetchToken();
   }, [userInputs]);
 
-  /** get user information for current username */
+/** get user information for current username */
+  // TODO: fix naming here too
   useEffect(function fetchUserOnRender() {
     async function fetchUser() {
       try {
@@ -124,7 +127,7 @@ function App() {
       }
     }
     fetchUser();
-  }, [token, isUpdating]);
+  }, [token, isUpdating, userInputs.username]);
 
   /** update user when profile form is submitted  */
   // useEffect(function fetchUserOnProfileUpdate() {

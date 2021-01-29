@@ -25,7 +25,7 @@ function NavBar({ user, logoutUser }) {
           Jobly
         </NavLink>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
@@ -33,26 +33,26 @@ function NavBar({ user, logoutUser }) {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
               <NavLink to="/companies" className="nav-link">
                 Companies
               </NavLink>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <NavLink to="/jobs" className="nav-link">
                 Jobs
               </NavLink>
             </li>
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <NavLink exact to="/profile" className="nav-link">
                 Profile
               </NavLink>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <NavLink to="/" onClick={handleClick} className="nav-link font-weight-normal">
                 {" "}
                 Logout {user.firstName}
@@ -67,7 +67,7 @@ function NavBar({ user, logoutUser }) {
           Jobly
         </NavLink>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
@@ -75,16 +75,16 @@ function NavBar({ user, logoutUser }) {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item active">
               <NavLink to="/login" className="nav-link">
                 Login
               </NavLink>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <NavLink to="/signup" className="nav-link">
                 Sign Up
               </NavLink>

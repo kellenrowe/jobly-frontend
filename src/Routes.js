@@ -36,6 +36,7 @@ function Routes({ user, signupUser, loginUser, updateUser, applyToJob }) {
         <CompanyList />
       </Route>
       <Route exact path="/companies/:handle">
+        {/* TODO: add ternary security here */}
         <CompanyDetail userJobs={userJobs} applyToJob={applyToJob} />
       </Route>
       <Route exact path="/jobs">

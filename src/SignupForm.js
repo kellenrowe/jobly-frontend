@@ -50,9 +50,10 @@ function SignupForm({ signupUser }) {
           className="form-control"
           onChange={handleChange}
         />
-
-        <label htmlFor="firstName">First Name</label>
+        {/* TODO: fix htmlFor naming in all forms */}
+        <label htmlFor="signUpForm-firsName">First Name</label>
         <input
+          id="signUpForm-firsName"
           name="firstName"
           className="form-control"
           onChange={handleChange}
