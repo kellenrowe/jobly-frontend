@@ -20,7 +20,7 @@ function CompanyCard({ company }) {
       <p className="compName font-weight-bold mt-3 position-relative">{company.name}</p>
       {/* TODO: update company logo */}
       <img src={company.logoUrl} alt="logo" className="compLogo"/>
-      <p>{company.description}</p>
+      <p className="compDescription">{company.description}</p>
     </div>
   );
 }

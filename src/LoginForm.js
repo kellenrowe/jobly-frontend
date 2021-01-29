@@ -36,7 +36,7 @@ function LoginForm({ loginUser }) {
   }
 
   return (
-    <form className="LoginForm mx-auto" onSubmit={handleSubmit}>
+    <form className="LoginForm mx-auto col-6" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="username">Username</label>
         <input
@@ -53,7 +53,7 @@ function LoginForm({ loginUser }) {
         />
       </div>
       <div>
-        <button>Log In</button>
+        <button className="btn btn-primary">Log In</button>
       </div>
     </form>
   );

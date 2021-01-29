@@ -37,7 +37,7 @@ function ProfileForm({ updateUser, user }) {
   }
 
   return (
-    <form className="ProfileForm mx-auto" onSubmit={handleSubmit}>
+    <form className="ProfileForm mx-auto col-6" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="username"><b>Username</b></label>
         <p>{user.username}</p>
@@ -72,7 +72,7 @@ function ProfileForm({ updateUser, user }) {
         />
       </div>
       <div>
-        <button>Save Changes</button>
+        <button className="btn btn-primary">Save Changes</button>
       </div>
     </form>
   );

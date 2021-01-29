@@ -46,9 +46,9 @@ function CompanyDetail({ userJobs, applyToJob }) {
   if (isLoading) return <i>Loading...</i>;
 
   const showJobs = company
-    ? <div>
-      <h1>{company.name}</h1>
-      <p>{company.description}</p>
+    ? <div className="mt-4">
+      <h4 className="col-10 col-sm-8 col-md-6 mx-auto">{company.name}</h4>
+      <p className="col-10 col-sm-8 col-md-6 mx-auto">{company.description}</p>
       <JobCardList
         jobs={company.jobs}
         userJobs={userJobs}

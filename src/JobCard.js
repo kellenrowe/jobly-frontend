@@ -1,3 +1,5 @@
+import "./JobCard.css";
+
 /** Renders JobCard component
  * 
  *  Props:
@@ -21,20 +23,22 @@ function JobCard({ job, isApplied, applyToJob }) {
   }
 
   const showButton = ((!isApplied)
-    ? <button onClick={handleClick}>APPLY</button>
-    : <button >APPLIED</button>
+    ? <button className="btn btn-danger mb-3 ml-3" onClick={handleClick}>APPLY</button>
+    : <button className="btn btn-danger disabled mb-3 ml-3">APPLIED</button>
   );
 
   const showCompanyName = job.companyHandle
-    ? job.companyName
+    ? <p className="ml-3">
+      {job.companyName}
+      </p>
     : null;
 
   return (
-    <div className="JobCard border border-primary">
-      <h2>{job.title}</h2>
+    <div className="JobCard border border-danger mx-auto mt-3">
+      <p className="jobTitle ml-3 mt-3 font-weight-bold">{job.title}</p>
       {showCompanyName}
-      <p>Salary: {job.salary}</p>
-      <p>Equity: {job.equity}</p>
+      <p className="jobTitle ml-3">Salary: {job.salary}</p>
+      <p className="jobTitle ml-3">Equity: {job.equity}</p>
       {showButton}
     </div>
   );

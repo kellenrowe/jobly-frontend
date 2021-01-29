@@ -1,8 +1,8 @@
-.compName, .compDescription {
+.jobTitle, .jobDescription {
     text-decoration: none;
     color: #272727;
 }
-.compLogo {
+.jobLogo {
     /* display: inline; */
     position: absolute;
     top: 5px;

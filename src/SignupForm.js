@@ -34,7 +34,7 @@ function SignupForm({ signupUser }) {
   }
 
   return (
-    <form className="SignupForm mx-auto" onSubmit={handleSubmit}>
+    <form className="SignupForm mx-auto col-6" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="username">Username</label>
         <input
@@ -74,7 +74,7 @@ function SignupForm({ signupUser }) {
 
       </div>
       <div>
-        <button>Sign Up!</button>
+        <button className="btn btn-primary">Sign Up!</button>
       </div>
     </form>
   );

@@ -24,7 +24,7 @@ function JobCardList({ jobs, userJobs, applyToJob }) {
     }
 
     return (
-      <div className="JobCardList-job" key={job.id}>
+      <div className="col-10 col-sm-8 col-md-6 mx-auto mt-3" key={job.id}>
         <JobCard job={job} isApplied={isApplied} applyToJob={applyToJob} />
       </div>
     );

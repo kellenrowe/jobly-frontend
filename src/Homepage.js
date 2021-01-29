@@ -6,8 +6,8 @@
 
 function Homepage() {
   return (
-    <div className="Homepage">
-      <p>Welcome to the home page</p>
+    <div className="Homepage text-center mt-5">
+      <h3>Welcome to the home page</h3>
     </div>
   );
 }
