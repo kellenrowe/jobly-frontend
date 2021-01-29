@@ -1,5 +1,10 @@
 import "./CompanyCard.css";
 
+import logo1 from "./logos/logo1.png";
+import logo2 from "./logos/logo2.png";
+import logo3 from "./logos/logo3.png";
+import logo4 from "./logos/logo4.png";
+
 /** Renders CompanyCard
  * 
  *  Props:

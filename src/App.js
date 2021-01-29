@@ -10,7 +10,7 @@ import NavBar from "./NavBar";
 import Routes from "./Routes";
 
 /** Renders Jobly App
- * 
+ *  
  *  state:
  *  - user: object like -
  *      { username, 
