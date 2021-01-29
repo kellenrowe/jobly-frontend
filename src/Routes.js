@@ -23,7 +23,7 @@ import ProfileForm from "./ProfileForm";
 function Routes({ user, signupUser, loginUser, updateUser, applyToJob }) {
 
   // Grab job ids that user has applied to 
-  const userJobs = (Object.keys(user).length !== 0)
+  const userJobs = user
     ? user.applications
     : [];
 

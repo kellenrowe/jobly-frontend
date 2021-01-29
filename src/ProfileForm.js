@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "./Form.css";
 
 /** Renders ProfileForm component
- * 
+ *
  *  Props:
  *  - updateUser: fn passed down from parent to update user data
  *  - user: object with current user data
- * 
+ *
  *  State:
  *  - formData: input recieved from user
- * 
+ *
  *  Routes -> ProfileForm -> Alert
- *  
+ *
  * */
 function ProfileForm({ updateUser, user }) {
   const initialState = user;
@@ -37,41 +38,62 @@ function ProfileForm({ updateUser, user }) {
   }
 
   return (
-    <form className="ProfileForm mx-auto col-6" onSubmit={handleSubmit}>
+    <form
+      className="ProfileForm mx-auto col-10 col-sm-8 col-md-6 mt-5"
+      onSubmit={handleSubmit}
+    >
       <div className="form-group">
-        <label htmlFor="username"><b>Username</b></label>
-        <p>{user.username}</p>
-
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="username">
+          <b>Username: </b>{user.username}
+        </label>
+      </div>
+      <div className="form-group formField mt-4">
         <input
+          required
+          id="profileForm-firstName"
           value={user.firstName}
           name="firstName"
-          className="form-control"
+          className="formInput"
           onChange={handleChange}
         />
-        <label htmlFor="lastName">Last Name</label>
+        <label className="formLabel" htmlFor="profileForm-firstName">First Name</label>
+      </div>
+      <div className="form-group formField mt-4">
         <input
+          required
+          id="profileForm-lastName"
           value={user.lastName}
           name="lastName"
-          className="form-control"
+          className="formInput"
           onChange={handleChange}
         />
-        <label htmlFor="email">Email</label>
+        <label className="formLabel" htmlFor="profileForm-lastName">Last Name</label>
+      </div>
+      <div className="form-group formField mt-4">
         <input
+          required
+          id="profileForm-email"
           value={user.email}
           name="email"
-          className="form-control"
+          className="formInput"
           onChange={handleChange}
         />
-        <label htmlFor="password">Confirm password to save changes:</label>
+        <label className="formLabel" htmlFor="profileForm-email">Email</label>
+      </div>
+      <div className="form-group formField mt-4">
         <input
+          required
+          id="profileForm-password"
           type="password"
           name="password"
-          className="form-control"
+          className="formInput"
           onChange={handleChange}
         />
+        <label className="formLabel" htmlFor="profileForm-password">
+          Confirm password to save changes:
+        </label>
       </div>
-      <div>
+      <div className="text-right">
         <button className="btn btn-primary">Save Changes</button>
       </div>
     </form>

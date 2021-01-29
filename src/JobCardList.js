@@ -1,4 +1,5 @@
 import JobCard from "./JobCard";
+import "./cards.css";
 
 /** Renders JobCardList component 
  * 
@@ -24,7 +25,7 @@ function JobCardList({ jobs, userJobs, applyToJob }) {
     }
 
     return (
-      <div className="col-10 col-sm-8 col-md-6 mx-auto mt-3" key={job.id}>
+      <div className="jobCard col-10 col-sm-8 col-md-6 mx-auto mt-3 px-3 py-3" key={job.id}>
         <JobCard job={job} isApplied={isApplied} applyToJob={applyToJob} />
       </div>
     );

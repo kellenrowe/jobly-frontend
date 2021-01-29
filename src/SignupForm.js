@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "./Form.css";
 
 /** Renders SignupForm component
- * 
+ *
  *  Props:
  *  - signupUser: fn passed from parent to update user data
- * 
+ *
  *  State:
  *  - formData: input recieved from user
- * 
+ *
  *  Routes -> SignupForm -> Alert
  *  */
 function SignupForm({ signupUser }) {
@@ -34,47 +35,72 @@ function SignupForm({ signupUser }) {
   }
 
   return (
-    <form className="SignupForm mx-auto col-6" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="username">Username</label>
+    <form
+      className="SignupForm mx-auto col-10 col-sm-8 col-md-6 mt-5"
+      onSubmit={handleSubmit}
+    >
+      <div className="form-group formField">
         <input
+          required
+          id="signUpForm-username"
           name="username"
-          className="form-control"
+          className="formInput"
           onChange={handleChange}
         />
-
-        <label htmlFor="password">Password</label>
+        <label className="formLabel" htmlFor="signUpForm-username">
+          Username
+        </label>
+      </div>
+      <div className="form-group formField">
         <input
+          required
+          id="signUpForm-password"
           type="password"
           name="password"
-          className="form-control"
+          className="formInput"
           onChange={handleChange}
         />
-        {/* TODO: fix htmlFor naming in all forms */}
-        <label htmlFor="signUpForm-firsName">First Name</label>
-        <input
-          id="signUpForm-firsName"
-          name="firstName"
-          className="form-control"
-          onChange={handleChange}
-        />
-
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          name="lastName"
-          className="form-control"
-          onChange={handleChange}
-        />
-
-        <label htmlFor="email">Email</label>
-        <input
-          name="email"
-          className="form-control"
-          onChange={handleChange}
-        />
-
+        <label className="formLabel" htmlFor="signUpForm-password">
+          Password
+        </label>
       </div>
-      <div>
+      <div className="form-group formField">
+        <input
+          required
+          id="signUpForm-firstName"
+          name="firstName"
+          className="formInput"
+          onChange={handleChange}
+        />
+        <label className="formLabel" htmlFor="signUpForm-firstName">
+          First Name
+        </label>
+      </div>
+      <div className="form-group formField">
+        <input
+          required
+          id="signUpForm-lastName"
+          name="lastName"
+          className="formInput"
+          onChange={handleChange}
+        />
+        <label className="formLabel" htmlFor="signUpForm-lastName">
+          Last Name
+        </label>
+      </div>
+      <div className="form-group formField">
+        <input
+          required
+          id="signUpForm-email"
+          name="email"
+          className="formInput"
+          onChange={handleChange}
+        />
+        <label className="formLabel" htmlFor="signUpForm-email">
+          Email
+        </label>
+      </div>
+      <div className="text-right">
         <button className="btn btn-primary">Sign Up!</button>
       </div>
     </form>

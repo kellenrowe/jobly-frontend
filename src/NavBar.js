@@ -19,7 +19,7 @@ function NavBar({ user, logoutUser }) {
   }
 
   const navbar =
-    Object.keys(user).length !== 0 ? (
+    user ? (
       <div className="container">
         <NavLink exact to="/" className="navbar-brand font-weight-bold">
           Jobly
@@ -63,7 +63,7 @@ function NavBar({ user, logoutUser }) {
       </div>
     ) : (
       <div className="container">
-        <NavLink exact to="/" className="navbar-brand">
+        <NavLink exact to="/" className="navbar-brand font-weight-bold">
           Jobly
         </NavLink>
         <button
@@ -79,7 +79,7 @@ function NavBar({ user, logoutUser }) {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
+            <li className="nav-item">
               <NavLink to="/login" className="nav-link">
                 Login
               </NavLink>

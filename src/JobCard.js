@@ -28,18 +28,21 @@ function JobCard({ job, isApplied, applyToJob }) {
   );
 
   const showCompanyName = job.companyHandle
-    ? <p className="ml-3">
+    ? <p className="ml-3 mb-4">
       {job.companyName}
       </p>
     : null;
 
   return (
-    <div className="JobCard border border-danger mx-auto mt-3">
-      <p className="jobTitle ml-3 mt-3 font-weight-bold">{job.title}</p>
+    <div className="JobCard mx-auto mt-3">
+      <h5 className="jobTitle ml-3 my-0 font-weight-bold">{job.title}</h5>
       {showCompanyName}
-      <p className="jobTitle ml-3">Salary: {job.salary}</p>
-      <p className="jobTitle ml-3">Equity: {job.equity}</p>
+      <p className="ml-3 mb-0"><small>Salary: {job.salary}</small></p>
+      <p className="ml-3 mb-0"><small>Equity: {job.equity}</small></p>
+      <div className="text-right">
       {showButton}
+
+      </div>
     </div>
   );
 }

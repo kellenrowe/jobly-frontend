@@ -1,0 +1,27 @@
+.formField {
+    position: relative;
+}
+
+.formInput {
+    width: 100%;
+    padding: 8px 0 8px 0;
+    border: none;
+    outline: none;
+    border-bottom: .12rem solid #d0d0d0;
+}
+
+.formLabel {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    transition: .5s;
+    pointer-events: none;
+    color: #828282;
+}
+
+.formInput:focus ~ label,
+.formInput:valid ~ label {
+    top: -12px;
+    left: 0;
+    font-size: 12px;
+}

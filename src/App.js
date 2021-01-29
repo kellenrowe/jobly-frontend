@@ -35,7 +35,7 @@ import Routes from "./Routes";
  */
 function App() {
   // NOTE: Question about number of states?
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [userInputs, setUserInputs] = useState({});
   // const [appliedJob, setAppliedJob] = useState({});
   const [token, setToken] = useState("");
@@ -73,7 +73,7 @@ function App() {
 
   /** Logout user by returning user to initialState */
   function logoutUser() {
-    setUser({});
+    setUser(null);
     setUserInputs({});
     setToken("")
     // setIsSuccess(false);
@@ -92,15 +92,14 @@ function App() {
       try {
         if (isSigningUp === true) {
           let resp = await JoblyApi.signupUser(userInputs);
-          // TODO: consider naming here for resp
-          resp = resp.token;
-          setToken(resp);
+          let newToken = resp.token;
+          setToken(newToken);
           // setIsSuccess(true);
         }
         if (isLoggingIn === true) {
           let resp = await JoblyApi.loginUser(userInputs);
-          resp = resp.token;
-          setToken(resp);
+          let newToken = resp.token;
+          setToken(newToken);
           // setIsSuccess(true);
         }
       } catch (err) {
@@ -109,13 +108,11 @@ function App() {
       setIsSigningUp(false);
       setIsLoggingIn(false);
     }
-    // TODO: move states to dependencies 
     fetchToken();
-  }, [userInputs]);
+  }, [userInputs, isLoggingIn, isSigningUp]);
 
 /** get user information for current username */
-  // TODO: fix naming here too
-  useEffect(function fetchUserOnRender() {
+  useEffect(function fetchUserWhenUser() {
     async function fetchUser() {
       try {
         if ((isUpdating === false) && (token.length !== 0)) {
@@ -157,7 +154,7 @@ function App() {
 
 
   // TODO: Show error messages to user
-  if (error) console.log(error);
+  if (error) console.log("error = ", error);
 
   // TODO: Incorporate a message for successful login or register of user
   // if (isSuccess)

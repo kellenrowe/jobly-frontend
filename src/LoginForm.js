@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "./Form.css";
 
 /** Renders LoginForm component
- * 
+ *
  *  Props:
  *  - loginUser: fn passed from parent to update user data
- * 
+ *
  *  State:
  *  - formData: input recieved from user
- * 
+ *
  *  Routes -> LoginForm -> Alert
- *  
+ *
  * */
 
 function LoginForm({ loginUser }) {
@@ -36,23 +37,34 @@ function LoginForm({ loginUser }) {
   }
 
   return (
-    <form className="LoginForm mx-auto col-6" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="username">Username</label>
+    <form
+      className="LoginForm mx-auto col-10 col-sm-8 col-md-6 mt-5"
+      onSubmit={handleSubmit}
+    >
+      <div className="form-group formField">
         <input
+          required
           name="username"
-          className="form-control"
+          className="formInput"
           onChange={handleChange}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="username" className="formLabel">
+          Username
+        </label>
+      </div>
+      <div className="form-group formField">
         <input
+          required
           type="password"
           name="password"
-          className="form-control"
+          className="formInput"
           onChange={handleChange}
         />
+        <label htmlFor="password" className="formLabel">
+          Password
+        </label>
       </div>
-      <div>
+      <div className="text-right">
         <button className="btn btn-primary">Log In</button>
       </div>
     </form>
