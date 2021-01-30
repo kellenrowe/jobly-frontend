@@ -33,7 +33,9 @@ function LoginForm({ loginUser }) {
     evt.preventDefault();
     loginUser(formData);
     setFormData(initialState);
+    console.log('1')
     history.push("/companies");
+    console.log('2')
   }
 
   return (

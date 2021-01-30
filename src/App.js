@@ -78,7 +78,8 @@ function App() {
   function logoutUser() {
     setUser(null);
     setUserInputs({});
-    setToken("")
+    setToken("");
+    setIsLoggingIn(false);
     // setIsSuccess(false);
   }
 
@@ -109,7 +110,6 @@ function App() {
         setError(err);
       }
       setIsSigningUp(false);
-      setIsLoggingIn(false);
     }
     fetchToken();
   }, [userInputs, isLoggingIn, isSigningUp]);
@@ -157,7 +157,7 @@ function App() {
 
 
   // TODO: Show error messages to user
-  if (error) console.log("error = ", error);
+  // if (error) console.log("error = ", error);
 
   // TODO: Incorporate a message for successful login or register of user
   // if (isSuccess)
@@ -174,6 +174,7 @@ function App() {
           loginUser={loginUser}
           updateUser={updateUser}
           applyToJob={applyToJob}
+          loggedIn={isLoggingIn}
         />
       </BrowserRouter>
     </div>

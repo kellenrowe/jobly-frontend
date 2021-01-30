@@ -1,13 +1,19 @@
-// import { Link } from "react-router-dom";
+import "./Homepage.css";
 
 /** Renders Homepage component 
  *  Routes -> Homepage 
  *  */
-
-function Homepage() {
+function Homepage({ user }) {
+  let greeting = user
+    ? <h3>Welcome back {user.firstName}!</h3>
+    : <h3>Welcome!</h3>
   return (
-    <div className="Homepage text-center mt-5">
-      <h3>Welcome to the home page</h3>
+    <div className="Homepage">
+      <div className="col-12 text-center">
+        <h1 className="font-weight-bold"><b>Jobly</b></h1>
+        <p>All the jobs in one, convenient place.</p>
+        {greeting}
+      </div>
     </div>
   );
 }

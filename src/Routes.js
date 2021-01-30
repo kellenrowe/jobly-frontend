@@ -8,36 +8,37 @@ import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import ProfileForm from "./ProfileForm";
 
-/** Renders Routes component. 
- * 
- *  Props: 
+/** Renders Routes component.
+ *
+ *  Props:
  *  - user: object with current user data
  *  - signupUser: fn passed from parent (App) to sign up user data
  *  - loginUser: fn passed from parent (App) to login user data
  *  - updateUser: fn passed from parent (App) to update user data
  *  - applyToJob: fn passed from parent (App) to apply to a job
- * 
- *  App -> Routes -> { Homepage, CompanyList, CompanyDetail, JobList, 
+ *
+ *  App -> Routes -> { Homepage, CompanyList, CompanyDetail, JobList,
  *                      LoginForm, SignupForm, ProfileForm }
-*/
-function Routes({ user, signupUser, loginUser, updateUser, applyToJob }) {
-
-  // Grab job ids that user has applied to 
-  const userJobs = user
-    ? user.applications
-    : [];
+ */
+function Routes({
+  user, signupUser, loginUser, updateUser, applyToJob, loggedIn }) {
+  // Grab job ids that user has applied to
+  const userJobs = user ? user.applications : [];
 
   return (
     <Switch>
       <Route exact path="/">
-        <Homepage />
+        <Homepage user={user} />
       </Route>
       <Route exact path="/companies">
-        <CompanyList />
+        {loggedIn
+          ? (<CompanyList userJobs={userJobs} applyToJob={applyToJob} />)
+          : (<Redirect to="/login" />)}
       </Route>
       <Route exact path="/companies/:handle">
-        {/* TODO: add ternary security here */}
-        <CompanyDetail userJobs={userJobs} applyToJob={applyToJob} />
+        {user
+          ? (<CompanyDetail userJobs={userJobs} applyToJob={applyToJob} />)
+          : (<Redirect to="/login" />)}
       </Route>
       <Route exact path="/jobs">
         <JobList userJobs={userJobs} applyToJob={applyToJob} />
