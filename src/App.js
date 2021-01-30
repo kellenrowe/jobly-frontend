@@ -1,4 +1,3 @@
-// http://one-insect.surge.sh/ -> current URL
 import './App.css';
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -182,3 +181,15 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+// unkempt-quartz.surge.sh/ -> current URL
+
+// re-deploy instructions:
+
+//  REACT_APP_BASE_URL=https://my-jobly-app.herokuapp.com npm run build
+//  cp build/index.html build/200.html
+//  surge build
