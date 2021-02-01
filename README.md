@@ -1,3 +1,8 @@
+Welcome to Jobly! This front-end was a 4 day sprint and the follow up to the Jobly backend project
+which can be found here -> https://github.com/kellenrowe/jobly-backend
+
+See the launched version at -> unkempt-quartz.surge.sh/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
