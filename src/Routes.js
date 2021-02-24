@@ -41,7 +41,9 @@ function Routes({
           : (<Redirect to="/login" />)}
       </Route>
       <Route exact path="/jobs">
-        <JobList userJobs={userJobs} applyToJob={applyToJob} />
+        {loggedIn
+          ? (<JobList userJobs={userJobs} applyToJob={applyToJob} />)
+          : (<Redirect to="/login" />)}
       </Route>
       <Route exact path="/login">
         <LoginForm loginUser={loginUser} />

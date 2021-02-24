@@ -16,12 +16,13 @@ import "./cards.css";
  *  */
 
 function JobCardList({ jobs, userJobs, applyToJob }) {
+  console.log('userJobs :>> ', userJobs);
   // Loop through each job in the jobs array and identify if job isApplied
   // to create JobCard for each job
   const showJobs = jobs.map(job => {
     let isApplied = false;
     if (userJobs.length !== 0) {
-      isApplied = userJobs.some(e => e.id === job.id);
+      isApplied = userJobs.includes(job.id);
     }
 
     return (

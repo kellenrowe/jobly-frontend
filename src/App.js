@@ -39,13 +39,13 @@ function App() {
 
   const [user, setUser] = useState(null);
   const [userInputs, setUserInputs] = useState({});
-  // const [appliedJob, setAppliedJob] = useState({});
+  const [appliedJob, setAppliedJob] = useState({});
   const [token, setToken] = useState("");
-  const [error, setError] = useState([]);
+  // const [error, setError] = useState([]);
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
-  // const [isApplying, setIsApplying] = useState(false);
+  // const [isUpdating, setIsUpdating] = useState(false);
+  const [isApplying, setIsApplying] = useState(false);
   // const [isSuccess, setIsSuccess] = useState(false);
   JoblyApi.token = token;
 
@@ -85,8 +85,8 @@ function App() {
   /** TODO: Adds job applied to user */
   function applyToJob(jobId) {
     console.log("applied to ", jobId);
-    // setAppliedJob(jobId);
-    // setIsApplying(true);
+    setAppliedJob(jobId);
+    setIsApplying(true);
   }
 
   /** Get a token for login, register, or updated profile of user with userinnputs */
@@ -106,7 +106,7 @@ function App() {
           // setIsSuccess(true);
         }
       } catch (err) {
-        setError(err);
+        console.log(err);
       }
       setIsSigningUp(false);
     }
@@ -117,16 +117,52 @@ function App() {
   useEffect(function fetchUserWhenUser() {
     async function fetchUser() {
       try {
-        if ((isUpdating === false) && (token.length !== 0)) {
+        if (token.length !== 0) {
           const newUser = await JoblyApi.getUser(userInputs.username);
           setUser(newUser.user);
         }
       } catch (err) {
-        setError(err);
+        console.log(err);
       }
     }
     fetchUser();
-  }, [token, isUpdating, userInputs.username]);
+  }, [token, userInputs.username]);
+
+ /** apply to job if user clicks on "apply" button */
+  useEffect(function applyToJobOnClick() {
+    async function applyToJobInDatabase() {
+      console.log('applying in db')
+      try {
+        await JoblyApi.applyToJob(user.username, appliedJob);
+      } catch (err) {
+        console.error("error", err);
+      }
+    }
+    if (isApplying) {
+      applyToJobInDatabase()
+      // fetchUpdatedUser();
+      setIsApplying(false);
+    }
+  }, [isApplying, appliedJob, user?.username]);
+
+
+/** refresh user info after clicking apply */
+  useEffect(function fetchUserWhenUserApplies() {
+    async function fetchUserAfterApply() {
+      console.log('applied job has changed :>> ');
+      try {
+        if (token.length !== 0) {
+          console.log('getting user')
+          const updatedUser = await JoblyApi.getUser(user?.username);
+          setUser(updatedUser.user);
+        }
+      } catch (err) {
+        console.error("error 2", err);
+      }
+    }
+    fetchUserAfterApply();
+    setAppliedJob(null);
+  }, [appliedJob, token.length, user?.username]);
 
   /** update user when profile form is submitted  */
   // useEffect(function fetchUserOnProfileUpdate() {
@@ -134,25 +170,12 @@ function App() {
   //     try {
   //       await JoblyApi.updateUser(userInputs);
   //     } catch (err){
-  //       setError(err);
+  //       console.log(err);
   //     }
   //     setIsUpdating(false);
   //   }
   //   fetchUserProfileUpdate();
   // }, [userInputs]);
-
-  /** apply to job if user clicks on "apply" button */
-  // useEffect(function applyToJobOnClick() {
-  //   async function applyToJob() {
-  //     let resp;
-  //     try {
-  //       resp = await JoblyApi.applyToJob(user.username, appliedJob);
-  //     } catch (err) {
-  //       setError(err);
-  //     }
-  //   }
-  //   fetchUpdatedUser();
-  // }, [isApplying]);
 
 
   // TODO: Show error messages to user
@@ -184,12 +207,12 @@ export default App;
 
 
 
-
-
 // unkempt-quartz.surge.sh/ -> current URL
 
 // re-deploy instructions:
 
 //  REACT_APP_BASE_URL=https://my-jobly-app.herokuapp.com npm run build
 //  cp build/index.html build/200.html
-//  surge build
+
+// - cd into build/
+//  surge . jobly.kellen-rowe.com
